@@ -1,10 +1,11 @@
 // using System.Collections;
 // using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Backpack : MonoBehaviour
+public class DiceSlot : MonoBehaviour
 {
-    
+    public Image icon;
 
     // Start is called before the first frame update
     void Start()
@@ -17,4 +18,14 @@ public class Backpack : MonoBehaviour
     {
         
     }
+
+    public void SetVisible()
+    {
+        icon.enabled = true;
+    }//SetVisable
+
+    public void SetInvisible()
+    {
+        icon.enabled = false;
+    }//SetInvisible
 }
