@@ -12,9 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8247f479941afbc4db5adcc3d6c75002, type: 3}
   m_Name: Sesame Tangyuan
   m_EditorClassIdentifier: 
-  max_HP: 0
-  current_HP: 0
-  base_attack: 0
-  base_defence: 0
-  buff: 0
-  debuff: 0
+  max_HP_: 100
+  current_HP_: 100
+  base_attack_: 4

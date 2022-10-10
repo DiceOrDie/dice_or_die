@@ -6,9 +6,7 @@ using UnityEngine;
 public class EntityData_SO : ScriptableObject
 {
     [Header("Entity Info")]
-    public int max_HP;
-    public int current_HP;
-    public int base_attack;
-    public int buff;
-    public int debuff;
+    public int max_HP_;
+    public int current_HP_;
+    public int base_attack_;
 }

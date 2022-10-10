@@ -10,9 +10,11 @@ public enum DiceType
     grass
 }
 
-public struct Dice
+public class Dice
 {
     public Dice(DiceType _t) { type = _t; }
 
     public DiceType type;
+
+    public int point_;
 }
