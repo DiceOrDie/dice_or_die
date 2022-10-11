@@ -6,7 +6,9 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField]
     public GameObject backpack_go_;
-    
+    public GameObject hands_go_;
+    public GameObject player_gameobject_;
+    public List<GameObject> monsters_gameobject_;
     
 
     static public GameManager instance;
@@ -28,6 +30,7 @@ public class GameManager : MonoBehaviour
     private bool flag_is_room_end_;
     private Character character_;
     private Backpack backpack_;
+    private Hands hands_;
 
     public Character character{
         get { return character_; }
@@ -47,14 +50,17 @@ public class GameManager : MonoBehaviour
         StartCoroutine(GameRoutine());
     }
     void Start() {
-        backpack_ = backpack_go_.GetComponentInChildren<Backpack>();
+        backpack_ = backpack_go_.GetComponent<Backpack>();
+        hands_ = hands_go_.GetComponent<Hands>();
+        character_ = player_gameobject_.GetComponent<Character>();
+        foreach(GameObject monster_gameobject in monsters_gameobject_) {
+            monsters_.Add(monster_gameobject.GetComponent<Monster>());
+        }
+        RoomStart();
     }
     IEnumerator GameRoutine() {
         while (!flag_is_room_end_) {
             switch (game_state_) {
-            case GameState.kRoomStart:
-                yield return RoomStart();
-                break;
             case GameState.kRoundStart:
                 yield return RoundStart();
                 break;
@@ -104,8 +110,8 @@ public class GameManager : MonoBehaviour
     IEnumerator PlayerDrawDice() {
         // TODO: turn on backpack UI
         Debug.Log("PlayerDrawDice() started.");
-        backpack_.startDraw();
-        yield return new WaitUntil(() => backpack_.drawOnGoing == false);
+        backpack_.StartDraw();
+        yield return new WaitUntil(() => backpack_.is_draw_on_going_ == false);
         Debug.Log("PlayerDrawDice() finished.");
         game_state_ = GameState.kPlayerSelectDice;
         //yield return null;
@@ -113,43 +119,60 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PlayerSelectDice() {
         // TODO
+        Debug.Log("PlayerSelectDice() started.");
+        hands_.StartSelect();
+        yield return new WaitUntil(() => hands_.is_select_on_going == false);
+        rolled_dice_list_ = hands_.GetSelectedDice();
+        Debug.Log("PlayerSelectDice() finished.");
         game_state_ = GameState.kPlayerRollDice;
-        yield return null;
+        // yield return null;
     }
 
     IEnumerator PlayerRollDice() {
-        // TODO
+        // TODO: roll all dice in rolled_dice_list_
+        Debug.Log("PlayerRollDice() started.");
+        foreach (Dice dice in rolled_dice_list_) {
+            Debug.Log(dice.RollDice());
+        }
+        Debug.Log("PlayerRollDice() finished.");
         game_state_ = GameState.kPlayerAttack;
         yield return null;
     }
 
     IEnumerator PlayerAttack() {
-        character_.Attack(rolled_dice_list_, monsters_);
+        Debug.Log("PlayerAttack() started.");
+        Debug.Log("Attack: " + character_.Attack(rolled_dice_list_, monsters_));
         foreach (Monster monster in monsters_) {
             if (!monster.IsAlive()) {
                 monsters_.Remove(monster);
+                Destroy(monster.gameObject);
             }
         }
-        JudgeGameEnd();
+        isGameEnd();
+        Debug.Log("PlayerAttack() finished.");
         game_state_ = GameState.kMonsterAttack;
         yield return null;
     }
 
     IEnumerator MonsterAttack() {
+        Debug.Log("MonsterAttack() started.");
         foreach (Monster monster in monsters_) {
-            monster.Attack(character_);
+            Debug.Log("Monster Attack: " + monster.Attack(character_));
         }
-        JudgeGameEnd();
+        isGameEnd();
+        Debug.Log("MonsterAttack() finished.");
         game_state_ = GameState.kRoundEnd;
         yield return null;
     }
     
     IEnumerator RoundEnd() {
+        Debug.Log("RoundEnd() started.");
         character_.UpdateState();
         foreach (Monster monster in monsters_) {
             monster.UpdateState();
         }
-        JudgeGameEnd();
+        isGameEnd();
+        Debug.Log("RoundEnd() finished.");
         // TODO: RoundStart
         if (!flag_is_room_end_) {
             game_state_ = GameState.kRoundStart;
@@ -161,7 +184,7 @@ public class GameManager : MonoBehaviour
     
     void MonsterRoomInitialize() {}
     
-    void JudgeGameEnd() {
+    void isGameEnd() {
         if (!character_.IsAlive()) {
             flag_is_room_end_ = true;
         }

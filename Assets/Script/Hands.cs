@@ -22,47 +22,79 @@ public class Hands : MonoBehaviour
 
     public Button rollButton;
     public Transform itemsParent;
+    public bool is_select_on_going;
 
-    Image[] slots;
-    List<Dice> diceInHands = new List<Dice>();
+    // Image[] slots;
+    List<GameObject> dice_o_list_;
+    List<Dice> dice_list_;
+    List<Dice> selected_dice_;
 
     void Start()
     {
-        slots = itemsParent.GetComponentsInChildren<Image>();
-        UpdateUI();
+        dice_list_  = new List<Dice>();
+        dice_o_list_ = new List<GameObject>();
+        // slots = itemsParent.GetComponentsInChildren<Image>();
+        is_select_on_going = false;
+        // UpdateUI();
     }//Start
+
+    public void StartSelect()
+    {
+        selected_dice_ = new List<Dice>();
+        is_select_on_going = true;
+    }
+
+    public List<Dice> GetSelectedDice(){
+        return selected_dice_;
+    }
 
     public void OnRollButton()
     {
-        diceInHands.RemoveAt(0);
-        UpdateUI();
+        /* move selected dice from diceInHands to selectedDice */
+        foreach(Dice dice in dice_list_) {
+            Debug.Log(dice.gameObject.name);
+            if(dice.selected_)
+            {
+                selected_dice_.Add(dice);
+                dice.gameObject.SetActive(false);
+            }
+        }
+
+        // UpdateUI();
         Debug.Log("Dice or Die!");
+        is_select_on_going = false;
     }//OnRollButton
 
-    void UpdateUI()
-    {
-        for (int i = 0; i < slots.Length; i++)
-        {
-            if (i < diceInHands.Count)
-            {
-                slots[i].enabled = true;
-            }//if
-            else
-            {
-                slots[i].enabled = false;
-            }//else
-        }//for i
-    }//UpdateUI
+    // void UpdateUI()
+    // {
+    //     for (int i = 0; i < slots.Length; i++)
+    //     {
+    //         if (i < dice_list_.Count)
+    //         {
+    //             slots[i].enabled = true;
+    //         }//if
+    //         else
+    //         {
+    //             slots[i].enabled = false;
+    //         }//else
+    //     }//for i
+    // }//UpdateUI
 
-    public void Add(Dice dice)
+    public void Add(GameObject dice_gameobject)
     {
-        if (diceInHands.Count >= 10)
+        if (dice_list_.Count >= 10)
         {
+            Destroy(dice_gameobject);
             Debug.Log("Hands full.");
             return;
         }//if
 
-        diceInHands.Add(dice);
-        UpdateUI();
+        dice_o_list_.Add(dice_gameobject);
+        dice_list_.Add(dice_gameobject.GetComponent<Dice>());
+        // UpdateUI();
     }//Add
+
+    public void OnDiceSelect(Dice dice) {
+        dice.SwitchSelected();
+    }
 }

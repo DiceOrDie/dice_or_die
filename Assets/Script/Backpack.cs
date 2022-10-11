@@ -23,60 +23,68 @@ public class Backpack : MonoBehaviour
     #endregion
 
     public GameObject draw_button_ob_;
-    private Button drawButton;
-    private Image drawButtonImage;
-    public Transform itemsParent;
-    public Dice[] diceInitial = { new Dice(DiceType.normal), new Dice(DiceType.normal), new Dice(DiceType.normal), new Dice(DiceType.normal), new Dice(DiceType.normal),
-                                  new Dice(DiceType.fire), new Dice(DiceType.fire), new Dice(DiceType.fire), new Dice(DiceType.fire), new Dice(DiceType.fire),
-                                  new Dice(DiceType.water), new Dice(DiceType.water), new Dice(DiceType.water), new Dice(DiceType.water), new Dice(DiceType.water),
-                                  new Dice(DiceType.grass), new Dice(DiceType.grass), new Dice(DiceType.grass), new Dice(DiceType.grass), new Dice(DiceType.grass) };
+    private Button draw_button_;
+    private Image draw_button_image_;
+    public Transform items_parent_;
+    public Transform hands_parent_;
+    // public Dice[] dice_initial_ = { new Dice(DiceType.normal), new Dice(DiceType.normal), new Dice(DiceType.normal), new Dice(DiceType.normal), new Dice(DiceType.normal),
+    //                               new Dice(DiceType.fire), new Dice(DiceType.fire), new Dice(DiceType.fire), new Dice(DiceType.fire), new Dice(DiceType.fire),
+    //                               new Dice(DiceType.water), new Dice(DiceType.water), new Dice(DiceType.water), new Dice(DiceType.water), new Dice(DiceType.water),
+    //                               new Dice(DiceType.grass), new Dice(DiceType.grass), new Dice(DiceType.grass), new Dice(DiceType.grass), new Dice(DiceType.grass) };
+    public List<GameObject> dice_initial_;
+    private List<GameObject> own_dice_gameobject_;
+    // private List<Dice> diceAvailable = new List<Dice>();
+    DiceSlot[] slots_;
 
-    private List<Dice> diceAvailable = new List<Dice>();
-    DiceSlot[] slots;
+    public bool is_draw_on_going_ = false;
 
-    public bool drawOnGoing = false;
-
-    public GameObject backpack_go_;
+    public GameObject backpack_gameobject_;
+    public int draw_dice_count_ = 2;
 
     void Start()
     {
-        slots = itemsParent.GetComponentsInChildren<DiceSlot>();
-        drawButton = draw_button_ob_.GetComponent<Button>();
-        drawButtonImage = draw_button_ob_.GetComponent<Image>();
+        own_dice_gameobject_ = new List<GameObject>();
+        slots_ = items_parent_.GetComponentsInChildren<DiceSlot>();
+        draw_button_ = draw_button_ob_.GetComponent<Button>();
+        draw_button_image_ = draw_button_ob_.GetComponent<Image>();
         Refill();
     }//Start
 
-    public void startDraw()
+    public void StartDraw()
     {
-        drawOnGoing = true;
+        is_draw_on_going_ = true;
         // drawButtonImage.enabled = true;
-        backpack_go_.SetActive(true);
-    }//startDraw
+        backpack_gameobject_.SetActive(true);
+    }//StartDraw
 
     void UpdateUI()
     {
-        for (int i = 0; i < slots.Length; i++)
-        {
-            if (i < diceAvailable.Count)
-            {
-                slots[i].SetVisible();
-            }//if
-            else
-            {
-                slots[i].SetInvisible();
-            }//else
-        }//for i
+        // for (int i = 0; i < slots.Length; i++)
+        // {
+        //     if (i < diceAvailable.Count)
+        //     {
+        //         slots[i].SetVisible();
+        //     }//if
+        //     else
+        //     {
+        //         slots[i].SetInvisible();
+        //     }//else
+        // }//for i
     }//UpdateUI
     
     void Refill()
     {
-        if (diceAvailable.Count <= 0)
+        if (own_dice_gameobject_.Count <= 0)
         {
             Debug.Log("Backpack empty. Refilling dice.");
-            foreach (Dice dice in diceInitial)
+            int i = 0;
+            foreach (GameObject dice_o in dice_initial_)
             {
                 //Debug.Log(dice);
-                diceAvailable.Add(dice);
+                GameObject o = Instantiate(dice_o, items_parent_);
+                o.name = "Dice" + i.ToString();
+                own_dice_gameobject_.Add(o);
+                i++;
             }//foreach dice
         }//if
         else
@@ -96,30 +104,36 @@ public class Backpack : MonoBehaviour
         Refill();
 
         int rand;
-        Dice diceDrawn1, diceDrawn2;
+        // Dice diceDrawn1, diceDrawn2;
 
         Debug.Log("Draw!\n");
 
-        rand = Random.Range(0, diceAvailable.Count);
-        diceDrawn1 = diceAvailable[rand];
-        diceAvailable.RemoveAt(rand);
-        Debug.Log(rand);
+        for (int i = 0; i < draw_dice_count_; i++){
+            rand = Random.Range(0, own_dice_gameobject_.Count);
+            own_dice_gameobject_[rand].transform.parent = hands_parent_;
+            Hands.instance.Add(own_dice_gameobject_[rand]);
+        }
+        
+        // rand = Random.Range(0, diceAvailable.Count);
+        // diceDrawn1 = diceAvailable[rand];
+        // diceAvailable.RemoveAt(rand);
+        // Debug.Log(rand);
 
-        rand = Random.Range(0, diceAvailable.Count);
-        diceDrawn2 = diceAvailable[rand];
-        diceAvailable.RemoveAt(rand);
-        Debug.Log(rand);
+        // rand = Random.Range(0, diceAvailable.Count);
+        // diceDrawn2 = diceAvailable[rand];
+        // diceAvailable.RemoveAt(rand);
+        // Debug.Log(rand);
 
-        Hands.instance.Add(diceDrawn1);
-        Hands.instance.Add(diceDrawn2);
+        // Hands.instance.Add(diceDrawn1);
+        // Hands.instance.Add(diceDrawn2);
 
-        Debug.Log("Remaining dice count: " + diceAvailable.Count);
+        // Debug.Log("Remaining dice count: " + diceAvailable.Count);
 
         // drawButtonImage.enabled = false;
-        backpack_go_.SetActive(false);
+        backpack_gameobject_.SetActive(false);
         
-        UpdateUI();
+        // UpdateUI();
 
-        drawOnGoing = false;
+        is_draw_on_going_ = false;
     }//OnDrawButton
 }
