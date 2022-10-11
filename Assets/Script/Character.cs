@@ -18,4 +18,9 @@ public class Character : Entity
 
         return;
     }
+
+    public void UpdateState()
+    {
+        // TODO
+    }
 }

@@ -4,6 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 public class GameManager : MonoBehaviour
 {
+    [SerializeField]
+    public GameObject backpack_go_;
+    
+    
+
     static public GameManager instance;
 
     public enum GameState {
@@ -22,8 +27,6 @@ public class GameManager : MonoBehaviour
     private GameState game_state_;
     private bool flag_is_room_end_;
     private Character character_;
-
-    public GameObject backpack_go_;
     private Backpack backpack_;
     
     public Character character{
@@ -78,6 +81,7 @@ public class GameManager : MonoBehaviour
                 break;
             }
         }
+        game_state_ = GameState.kRoomEnd;
     }
     
     IEnumerator RoomStart() {
@@ -112,7 +116,6 @@ public class GameManager : MonoBehaviour
     }
 
     IEnumerator PlayerAttack() {
-        // TODO
         character_.Attack(rolled_dice_list_, monsters_);
         foreach (Monster monster in monsters_) {
             if (!monster.IsAlive()) {
@@ -125,7 +128,6 @@ public class GameManager : MonoBehaviour
     }
 
     IEnumerator MonsterAttack() {
-        // TODO
         foreach (Monster monster in monsters_) {
             monster.Attack(character_);
         }
@@ -135,14 +137,15 @@ public class GameManager : MonoBehaviour
     }
     
     IEnumerator RoundEnd() {
-        // TODO
         character_.UpdateState();
         foreach (Monster monster in monsters_) {
             monster.UpdateState();
         }
         JudgeGameEnd();
         // TODO: RoundStart
-        // TODO: RoomEnd
+        if (!flag_is_room_end_) {
+            game_state_ = GameState.kRoundStart;
+        }
         yield return null;
     }
     

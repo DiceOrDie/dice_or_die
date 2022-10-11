@@ -36,7 +36,6 @@ public class Entity : MonoBehaviour
         { "burn",      0 }, //燃燒
         { "fragile",   0 }, //易碎
         { "paralysis", 0 }, //麻痺
-        { "heal",      0 }  //回復
     };
     // Start is called before the first frame update
 
