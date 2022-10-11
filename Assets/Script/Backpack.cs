@@ -22,7 +22,9 @@ public class Backpack : MonoBehaviour
 
     #endregion
 
-    public Button drawButton;
+    public GameObject draw_button_ob_;
+    private Button drawButton;
+    private Image drawButtonImage;
     public Transform itemsParent;
     public Dice[] diceInitial = { new Dice(DiceType.normal), new Dice(DiceType.normal), new Dice(DiceType.normal), new Dice(DiceType.normal), new Dice(DiceType.normal),
                                   new Dice(DiceType.fire), new Dice(DiceType.fire), new Dice(DiceType.fire), new Dice(DiceType.fire), new Dice(DiceType.fire),
@@ -32,11 +34,24 @@ public class Backpack : MonoBehaviour
     private List<Dice> diceAvailable = new List<Dice>();
     DiceSlot[] slots;
 
+    public bool drawOnGoing = false;
+
+    public GameObject backpack_go_;
+
     void Start()
     {
         slots = itemsParent.GetComponentsInChildren<DiceSlot>();
+        drawButton = draw_button_ob_.GetComponent<Button>();
+        drawButtonImage = draw_button_ob_.GetComponent<Image>();
         Refill();
     }//Start
+
+    public void startDraw()
+    {
+        drawOnGoing = true;
+        // drawButtonImage.enabled = true;
+        backpack_go_.SetActive(true);
+    }//startDraw
 
     void UpdateUI()
     {
@@ -100,6 +115,11 @@ public class Backpack : MonoBehaviour
 
         Debug.Log("Remaining dice count: " + diceAvailable.Count);
 
+        // drawButtonImage.enabled = false;
+        backpack_go_.SetActive(false);
+        
         UpdateUI();
+
+        drawOnGoing = false;
     }//OnDrawButton
 }

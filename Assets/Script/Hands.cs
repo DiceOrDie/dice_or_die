@@ -23,12 +23,12 @@ public class Hands : MonoBehaviour
     public Button rollButton;
     public Transform itemsParent;
 
-    DiceSlot[] slots;
+    Image[] slots;
     List<Dice> diceInHands = new List<Dice>();
 
     void Start()
     {
-        slots = itemsParent.GetComponentsInChildren<DiceSlot>();
+        slots = itemsParent.GetComponentsInChildren<Image>();
         UpdateUI();
     }//Start
 
@@ -45,11 +45,11 @@ public class Hands : MonoBehaviour
         {
             if (i < diceInHands.Count)
             {
-                slots[i].SetVisible();
+                slots[i].enabled = true;
             }//if
             else
             {
-                slots[i].SetInvisible();
+                slots[i].enabled = false;
             }//else
         }//for i
     }//UpdateUI

@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     private bool flag_is_room_end_;
     private Character character_;
     private Backpack backpack_;
-    
+
     public Character character{
         get { return character_; }
     }
@@ -85,22 +85,30 @@ public class GameManager : MonoBehaviour
     }
     
     IEnumerator RoomStart() {
+        Debug.Log("RoomStart() started.");
         PlayerRoomInitialize();
         MonsterRoomInitialize();
+        Debug.Log("RoomStart() finished.");
         game_state_ = GameState.kRoundStart;
         yield return null;
     }
     
     IEnumerator RoundStart() {
         // TODO
+        Debug.Log("RoundStart() started.");
+        Debug.Log("RoundStart() finished.");
         game_state_ = GameState.kPlayerDrawDice;
         yield return null;
     }
 
     IEnumerator PlayerDrawDice() {
         // TODO: turn on backpack UI
+        Debug.Log("PlayerDrawDice() started.");
+        backpack_.startDraw();
+        yield return new WaitUntil(() => backpack_.drawOnGoing == false);
+        Debug.Log("PlayerDrawDice() finished.");
         game_state_ = GameState.kPlayerSelectDice;
-        yield return null;
+        //yield return null;
     }
 
     IEnumerator PlayerSelectDice() {
