@@ -25,7 +25,7 @@ public class Monster : Entity
     [SerializeField]
     public MonsterBehavior_SO monsterBehavior_;
     
-    public Q<BehaMonsterBehavior_SO.Behavior> attack_qu;
+    public Queue<MonsterBehavior_SO.Behavior> attack_queue_;
 
     public void ReloadAttack()
     {
@@ -36,10 +36,10 @@ public class Monster : Entity
     }
     public void Attack(Character character)
     {
-        if(attack_queue_.empty())//badum tss
+        if(attack_queue_.Count == 0)//badum tss
             ReloadAttack();
 
-        MonsterBehavior_SO.Behavior now_attack = attack_queue.Dequeue();
+        MonsterBehavior_SO.Behavior now_attack = attack_queue_.Dequeue();
         
         character.current_HP_ -= now_attack.damage;
         character.state_["cold"] += now_attack.cold;
