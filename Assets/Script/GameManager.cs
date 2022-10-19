@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GameObject hands_go_;
     public GameObject player_gameobject_;
     public List<GameObject> monsters_gameobject_;
+    public Text state_text_;
     
 
     static public GameManager instance;
@@ -46,21 +48,28 @@ public class GameManager : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(this);
-        game_state_ = GameState.kRoomStart;
-        StartCoroutine(GameRoutine());
+        
     }
     void Start() {
+        
         backpack_ = backpack_go_.GetComponent<Backpack>();
         hands_ = hands_go_.GetComponent<Hands>();
         character_ = player_gameobject_.GetComponent<Character>();
+        monsters_ = new List<Monster>();
         foreach(GameObject monster_gameobject in monsters_gameobject_) {
             monsters_.Add(monster_gameobject.GetComponent<Monster>());
         }
-        RoomStart();
+        StartCoroutine(GameRoutine());
     }
     IEnumerator GameRoutine() {
+        int cnt = 0;
+        flag_is_room_end_ = false;
         while (!flag_is_room_end_) {
+            yield return UpdateStateText();
             switch (game_state_) {
+            case GameState.kRoomStart:
+                yield return RoomStart();
+                break;
             case GameState.kRoundStart:
                 yield return RoundStart();
                 break;
@@ -86,8 +95,13 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Error in GameManager/GameRoutine()/switch-case");
                 break;
             }
+            if(cnt >= 50)
+                break;
+            cnt++;
         }
         game_state_ = GameState.kRoomEnd;
+        yield return UpdateStateText();
+        Debug.Log("Room End");
     }
     
     IEnumerator RoomStart() {
@@ -125,7 +139,7 @@ public class GameManager : MonoBehaviour
         rolled_dice_list_ = hands_.GetSelectedDice();
         Debug.Log("PlayerSelectDice() finished.");
         game_state_ = GameState.kPlayerRollDice;
-        // yield return null;
+        yield return null;
     }
 
     IEnumerator PlayerRollDice() {
@@ -142,27 +156,34 @@ public class GameManager : MonoBehaviour
     IEnumerator PlayerAttack() {
         Debug.Log("PlayerAttack() started.");
         Debug.Log("Attack: " + character_.Attack(rolled_dice_list_, monsters_));
-        foreach (Monster monster in monsters_) {
+        yield return monsters_[0].ShowDamageText();
+        for(int i = 0; i < monsters_.Count; i++) {
+            Monster monster = monsters_[i];
             if (!monster.IsAlive()) {
                 monsters_.Remove(monster);
                 Destroy(monster.gameObject);
+                i--;
             }
         }
-        isGameEnd();
         Debug.Log("PlayerAttack() finished.");
+        if(isGameEnd())
+            game_state_ = GameState.kRoundEnd;
         game_state_ = GameState.kMonsterAttack;
-        yield return null;
+        yield return new WaitForSeconds(1f);
     }
 
     IEnumerator MonsterAttack() {
         Debug.Log("MonsterAttack() started.");
         foreach (Monster monster in monsters_) {
             Debug.Log("Monster Attack: " + monster.Attack(character_));
+            yield return character_.ShowDamageText();
+            yield return new WaitForSeconds(0.5f);
         }
-        isGameEnd();
         Debug.Log("MonsterAttack() finished.");
+        if(isGameEnd())
+            game_state_ = GameState.kRoundEnd;
         game_state_ = GameState.kRoundEnd;
-        yield return null;
+        yield return new WaitForSeconds(1f);
     }
     
     IEnumerator RoundEnd() {
@@ -170,6 +191,9 @@ public class GameManager : MonoBehaviour
         character_.UpdateState();
         foreach (Monster monster in monsters_) {
             monster.UpdateState();
+        }
+        foreach ( Dice dice in rolled_dice_list_) {
+            Destroy(dice.gameObject);
         }
         isGameEnd();
         Debug.Log("RoundEnd() finished.");
@@ -180,11 +204,13 @@ public class GameManager : MonoBehaviour
         yield return null;
     }
     
-    void PlayerRoomInitialize() {}
+    void PlayerRoomInitialize() {
+        character_.EntityInit();
+    }
     
     void MonsterRoomInitialize() {}
     
-    void isGameEnd() {
+    bool isGameEnd() {
         if (!character_.IsAlive()) {
             flag_is_room_end_ = true;
         }
@@ -198,5 +224,69 @@ public class GameManager : MonoBehaviour
         if (all_monster_die) {
             flag_is_room_end_ = true;
         }
+        return flag_is_room_end_;
+    }
+
+    IEnumerator UpdateStateText() {
+        switch (game_state_) {
+        case GameState.kRoomStart:
+            state_text_.text = "Room Start";
+            state_text_.gameObject.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            state_text_.gameObject.SetActive(false);
+            break;
+        case GameState.kRoundStart:
+            state_text_.text = "Round Start";
+            state_text_.gameObject.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            state_text_.gameObject.SetActive(false);
+            break;
+        case GameState.kPlayerDrawDice:
+            state_text_.text = "Player Draw Dice";
+            state_text_.gameObject.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            state_text_.gameObject.SetActive(false);
+            break;
+        case GameState.kPlayerSelectDice:
+            state_text_.text = "Player Select Dice";
+            state_text_.gameObject.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            state_text_.gameObject.SetActive(false);
+            break;
+        case GameState.kPlayerRollDice:
+            state_text_.text = "Player Roll Dice";
+            state_text_.gameObject.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            state_text_.gameObject.SetActive(false);
+            break;
+        case GameState.kPlayerAttack:
+            state_text_.text = "Player Attack";
+            state_text_.gameObject.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            state_text_.gameObject.SetActive(false);
+            break;
+        case GameState.kMonsterAttack:
+            state_text_.text = "Monster Attack";
+            state_text_.gameObject.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            state_text_.gameObject.SetActive(false);
+            break;
+        case GameState.kRoundEnd:
+            state_text_.text = "Round End";
+            state_text_.gameObject.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            state_text_.gameObject.SetActive(false);
+            break;
+        case GameState.kRoomEnd:
+            if(character_.IsAlive())
+                state_text_.text = "You Win!";
+            else
+                state_text_.text = "You Died.";
+            state_text_.gameObject.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            state_text_.gameObject.SetActive(false);
+            break;
+        }
+
     }
 }

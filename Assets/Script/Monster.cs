@@ -18,6 +18,10 @@ public class Monster : Entity
 
     public Queue<MonsterBehavior_SO> attack_queue_;
 
+    private void Start() {
+        EntityInit();
+        attack_queue_ = new Queue<MonsterBehavior_SO>();
+    }
     public void init(string monster_name)
     {
         switch(monster_name)
@@ -58,7 +62,8 @@ public class Monster : Entity
 
         MonsterBehavior_SO now_attack = attack_queue_.Dequeue();
 
-        character.current_HP_ -= now_attack.damage;
+        // character.current_HP_ -= now_attack.damage;
+        character.getDamage(-now_attack.damage);
         character.state_["cold"] += now_attack.cold;
         character.state_["burn"] += now_attack.burn;
         character.state_["frozen"] += now_attack.frozen;

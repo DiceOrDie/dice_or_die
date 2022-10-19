@@ -98,20 +98,24 @@ public class Backpack : MonoBehaviour
 
         return;
     }//Refill
-
+    public GameObject PickDice() {
+        if (own_dice_gameobject_.Count == 0) {
+            Refill();
+        }
+        int rand = Random.Range(0, own_dice_gameobject_.Count);
+        return own_dice_gameobject_[rand];
+    }
     public void OnDrawButton()
     {
         Refill();
-
-        int rand;
         // Dice diceDrawn1, diceDrawn2;
 
         Debug.Log("Draw!\n");
 
         for (int i = 0; i < draw_dice_count_; i++){
-            rand = Random.Range(0, own_dice_gameobject_.Count);
-            own_dice_gameobject_[rand].transform.parent = hands_parent_;
-            Hands.instance.Add(own_dice_gameobject_[rand]);
+            GameObject dice = PickDice();
+            own_dice_gameobject_.Remove(dice);
+            Hands.instance.Add(dice);
         }
         
         // rand = Random.Range(0, diceAvailable.Count);
@@ -136,4 +140,5 @@ public class Backpack : MonoBehaviour
 
         is_draw_on_going_ = false;
     }//OnDrawButton
+
 }

@@ -18,4 +18,11 @@ public class Dice_SO : ScriptableObject
     public int min_point_ = 1;
     public int max_point_ = 6;
     public int point_ = -1;
+
+    public Dice_SO (Dice_SO dice_so){
+        type_ = dice_so.type_;
+        min_point_ = dice_so.min_point_;
+        max_point_ = dice_so.max_point_;
+        point_ = dice_so.point_;
+    }
 }

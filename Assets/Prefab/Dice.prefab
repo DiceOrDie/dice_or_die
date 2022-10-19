@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dice_so_: {fileID: 11400000, guid: 6b5851edc04962642ba303d82eccfd97, type: 2}
+  dice_info_: {fileID: 11400000, guid: 6b5851edc04962642ba303d82eccfd97, type: 2}
   selected_pannel_: {fileID: 1464750872851735183}
   selected_: 0
 --- !u!1 &2817072494794527222

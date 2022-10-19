@@ -14,7 +14,8 @@ public class Character : Entity
             attack_damage += dice.point_;
         }
 
-        monsters[0].current_HP_ -= attack_damage;
+        // monsters[0].current_HP_ -= attack_damage;
+        monsters[0].getDamage(-attack_damage);
 
         return attack_damage.ToString();
     }

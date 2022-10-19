@@ -51,12 +51,13 @@ public class Hands : MonoBehaviour
     public void OnRollButton()
     {
         /* move selected dice from diceInHands to selectedDice */
-        foreach(Dice dice in dice_list_) {
-            Debug.Log(dice.gameObject.name);
-            if(dice.selected_)
+        for(int i = 0; i < dice_list_.Count; i++){
+            if(dice_list_[i].selected_)
             {
-                selected_dice_.Add(dice);
-                dice.gameObject.SetActive(false);
+                selected_dice_.Add(dice_list_[i]);
+                dice_list_[i].gameObject.SetActive(false);
+                dice_list_.RemoveAt(i);
+                i--;
             }
         }
 
@@ -80,17 +81,19 @@ public class Hands : MonoBehaviour
     //     }//for i
     // }//UpdateUI
 
-    public void Add(GameObject dice_gameobject)
+    public bool Add(GameObject dice_gameobject)
     {
         if (dice_list_.Count >= 10)
         {
             Destroy(dice_gameobject);
             Debug.Log("Hands full.");
-            return;
+            return false;
         }//if
 
+        dice_gameobject.transform.parent = itemsParent;
         dice_o_list_.Add(dice_gameobject);
         dice_list_.Add(dice_gameobject.GetComponent<Dice>());
+        return true;
         // UpdateUI();
     }//Add
 
