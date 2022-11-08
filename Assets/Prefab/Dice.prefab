@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4969013613926391868}
   - component: {fileID: 9067925521391349716}
   - component: {fileID: 3457873181079484629}
+  - component: {fileID: 7395911889140163858}
   m_Layer: 5
   m_Name: Dice
   m_TagString: Untagged
@@ -150,6 +151,26 @@ MonoBehaviour:
   dice_so_: {fileID: 11400000, guid: 6b5851edc04962642ba303d82eccfd97, type: 2}
   selected_pannel_: {fileID: 1464750872851735183}
   selected_: 0
+--- !u!95 &7395911889140163858
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132150725493196800}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 22b10eaa7d06a9c42b372ed8ee7a0ac5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2817072494794527222
 GameObject:
   m_ObjectHideFlags: 0

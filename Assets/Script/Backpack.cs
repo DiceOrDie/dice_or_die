@@ -66,7 +66,7 @@ public class Backpack : MonoBehaviour
     {
         is_draw_on_going_ = true;
         // drawButtonImage.enabled = true;
-        backpack_gameobject_.SetActive(true);
+        // backpack_gameobject_.SetActive(true);
         OnDrawButton();
     }//StartDraw
 
@@ -84,9 +84,6 @@ public class Backpack : MonoBehaviour
         //     }//else
         // }//for i
     }//UpdateUI
-    public void ClickBackpack() {
-        gameObject.SetActive(!gameObject.activeSelf);
-    }
     void Refill()
     {
         if (own_dice_gameobject_.Count <= 0)
@@ -149,7 +146,7 @@ public class Backpack : MonoBehaviour
         // Debug.Log("Remaining dice count: " + diceAvailable.Count);
 
         // drawButtonImage.enabled = false;
-        backpack_gameobject_.SetActive(false);
+        // backpack_gameobject_.SetActive(false);
         
         // UpdateUI();
 

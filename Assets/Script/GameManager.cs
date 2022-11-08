@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public GameObject backpack_go_;
     public GameObject hands_go_;
+    public GameObject result_bar_;
     public GameObject player_gameobject_;
     public List<GameObject> monsters_gameobject_;
     public Text state_text_;

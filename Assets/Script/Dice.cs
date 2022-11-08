@@ -44,7 +44,13 @@ public class Dice : MonoBehaviour
     }
     public bool SwitchSelected() {
         selected_ = !selected_;
-        selected_pannel_.gameObject.SetActive(!selected_pannel_.gameObject.activeSelf);
+        if(selected_) {
+            transform.parent = GameManager.instance.result_bar_.GetComponentInChildren<GridLayoutGroup>().transform;
+        }
+        else {
+            transform.parent = GameManager.instance.hands_go_.GetComponentInChildren<GridLayoutGroup>().transform;
+        }
+        // selected_pannel_.gameObject.SetActive(!selected_pannel_.gameObject.activeSelf);
         return selected_;
     }
     public int RollDice () {
