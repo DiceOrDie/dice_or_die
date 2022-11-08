@@ -9,8 +9,9 @@ public class Entity : MonoBehaviour
     [SerializeField] Text current_HP_text_;
     [SerializeField] Text max_HP_text_;
     [SerializeField] Text damage_text_;
-    [SerializeField] Animator damage_anaimator_;
+    [SerializeField] public Animator animator_;
     [SerializeField] AudioSource hurt_sound_;
+    [SerializeField] AudioSource die_sound_;
     EntityData_SO entity_info;
 
     #region Read for EntityData_SO
@@ -39,7 +40,12 @@ public class Entity : MonoBehaviour
     {
         return this.current_HP_ > 0;
     }
-
+    public IEnumerator Die() {
+        animator_.SetTrigger("die");
+        float animationLength = animator_.GetCurrentAnimatorStateInfo(0).length - 0.1f;
+        yield return new WaitForSecondsRealtime(animationLength);
+        Destroy(this);
+    }
     public Dictionary<string, int> state_ = new Dictionary<string, int>()
     {
         { "cold",      0 }, //寒冷
@@ -50,6 +56,9 @@ public class Entity : MonoBehaviour
     };
     public void PlayHurtSound() {
         hurt_sound_.Play();
+    }
+    public void PlayDieSound() {
+        die_sound_.Play();
     }
     public int getDamage(int damage) {
         current_HP_ += damage;
@@ -63,10 +72,9 @@ public class Entity : MonoBehaviour
         return current_HP_;
     }
     public IEnumerator ShowDamageText() {
-        damage_anaimator_.SetBool("get damage", true);
-        float animationLength = damage_anaimator_.GetCurrentAnimatorStateInfo(0).length - 0.1f;
+        animator_.SetTrigger("hurt");
+        float animationLength = animator_.GetCurrentAnimatorStateInfo(0).length - 0.1f;
         yield return new WaitForSecondsRealtime(animationLength);
-        damage_anaimator_.SetBool("get damage", false);
     }
     // Start is called before the first frame update
 

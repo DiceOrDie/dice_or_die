@@ -55,8 +55,19 @@ public class Monster : Entity
             attack_queue_.Enqueue(behaviour);
         }
     }
+
+    public bool CanAttack()
+    {
+        if(this.state_["frozen"] > 0 || this.state_["paralysis"] > 0)
+            return false;
+        else
+            return true;
+    }
     public string Attack(Character character)
     {
+        if(!CanAttack())
+            return "0";
+
         if(attack_queue_.Count == 0)
             ReloadAttack();
 
@@ -70,14 +81,39 @@ public class Monster : Entity
         character.state_["fragile"] += now_attack.fragile;
         character.state_["paralysis"] += now_attack.paralysis;
         current_HP_ += now_attack.heal;
+        animator_.SetTrigger("attack");
+
 
         return now_attack.damage.ToString();
     }
 
     public void UpdateState(){
-        // TODO
+        if(this.state_["burn"] > 0)
+        {
+            current_HP_ -= this.state_["burn"];
+            this.state_["burn"]--;
+        }
+
+        if(this.state_["frozen"] > 0)
+        {
+            this.state_["frozen"]--;
+        }
+
+        if(this.state_["paralysis"] > 0)
+        {
+            this.state_["paralysis"]--;
+        }
+
+        if(this.state_["cold"] >= 8) {
+            this.state_["cold"] -= 8;
+            this.state_["frozen"]++;
+        }
     }
 
     // #endregion
-
+    void OnTriggerEnter2D(Collider2D Other)
+    {
+        print("Hit monster:" + gameObject.name);
+        Other.gameObject.SetActive(false);
+    }
 }
