@@ -23,7 +23,7 @@ public class Hands : MonoBehaviour
     public Button rollButton;
     public Transform itemsParent;
     public bool is_select_on_going;
-
+    [SerializeField] GameObject mask_;
     // Image[] slots;
     List<GameObject> dice_o_list_;
     List<Dice> dice_list_;
@@ -40,6 +40,7 @@ public class Hands : MonoBehaviour
 
     public void StartSelect()
     {
+        mask_.SetActive(false);
         selected_dice_ = new List<Dice>();
         is_select_on_going = true;
     }
@@ -63,6 +64,7 @@ public class Hands : MonoBehaviour
 
         // UpdateUI();
         Debug.Log("Dice or Die!");
+        mask_.SetActive(true);
         is_select_on_going = false;
     }//OnRollButton
 

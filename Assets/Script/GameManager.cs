@@ -3,6 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+[System.Serializable]
+public class State {
+    DiceChance dice_chance;
+    RollChance roll_chance;
+}
+
+
+
 public class GameManager : MonoBehaviour
 {
     [SerializeField]

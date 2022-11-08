@@ -3,6 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public class DiceChance {
+    public float odd_dice_ = 0.0f;
+    public float even_dice_ = 0.0f;
+    public float cheat_dice_ = 0.0f;
+    public float normal_dice_ = 100.0f;
+}
+[System.Serializable]
+public class RollChance{
+    public float odd_p = 0.0f;
+    public float even_p = 0.0f;
+}
+
 public class Backpack : MonoBehaviour
 {
     #region Singleton
@@ -32,7 +45,7 @@ public class Backpack : MonoBehaviour
     //                               new Dice(DiceType.water), new Dice(DiceType.water), new Dice(DiceType.water), new Dice(DiceType.water), new Dice(DiceType.water),
     //                               new Dice(DiceType.grass), new Dice(DiceType.grass), new Dice(DiceType.grass), new Dice(DiceType.grass), new Dice(DiceType.grass) };
     public List<GameObject> dice_initial_;
-    private List<GameObject> own_dice_gameobject_;
+    private List<GameObject> own_dice_gameobject_ = new List<GameObject>();
     // private List<Dice> diceAvailable = new List<Dice>();
     DiceSlot[] slots_;
 
@@ -43,7 +56,6 @@ public class Backpack : MonoBehaviour
 
     void Start()
     {
-        own_dice_gameobject_ = new List<GameObject>();
         slots_ = items_parent_.GetComponentsInChildren<DiceSlot>();
         draw_button_ = draw_button_ob_.GetComponent<Button>();
         draw_button_image_ = draw_button_ob_.GetComponent<Image>();
@@ -55,6 +67,7 @@ public class Backpack : MonoBehaviour
         is_draw_on_going_ = true;
         // drawButtonImage.enabled = true;
         backpack_gameobject_.SetActive(true);
+        OnDrawButton();
     }//StartDraw
 
     void UpdateUI()
@@ -71,7 +84,9 @@ public class Backpack : MonoBehaviour
         //     }//else
         // }//for i
     }//UpdateUI
-    
+    public void ClickBackpack() {
+        gameObject.SetActive(!gameObject.activeSelf);
+    }
     void Refill()
     {
         if (own_dice_gameobject_.Count <= 0)

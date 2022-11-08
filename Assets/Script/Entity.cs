@@ -10,6 +10,7 @@ public class Entity : MonoBehaviour
     [SerializeField] Text max_HP_text_;
     [SerializeField] Text damage_text_;
     [SerializeField] Animator damage_anaimator_;
+    [SerializeField] AudioSource hurt_sound_;
     EntityData_SO entity_info;
 
     #region Read for EntityData_SO
@@ -47,7 +48,9 @@ public class Entity : MonoBehaviour
         { "fragile",   0 }, //易碎
         { "paralysis", 0 }, //麻痺
     };
-
+    public void PlayHurtSound() {
+        hurt_sound_.Play();
+    }
     public int getDamage(int damage) {
         current_HP_ += damage;
         damage_text_.text = damage.ToString();
@@ -60,12 +63,10 @@ public class Entity : MonoBehaviour
         return current_HP_;
     }
     public IEnumerator ShowDamageText() {
-        damage_text_.gameObject.SetActive(true);
-        damage_anaimator_.SetBool("show_damage", true);
+        damage_anaimator_.SetBool("get damage", true);
         float animationLength = damage_anaimator_.GetCurrentAnimatorStateInfo(0).length - 0.1f;
         yield return new WaitForSecondsRealtime(animationLength);
-        damage_anaimator_.SetBool("show_damage", false);
-        damage_text_.gameObject.SetActive(false);
+        damage_anaimator_.SetBool("get damage", false);
     }
     // Start is called before the first frame update
 
@@ -78,4 +79,3 @@ public class Entity : MonoBehaviour
 
     
 }
-
