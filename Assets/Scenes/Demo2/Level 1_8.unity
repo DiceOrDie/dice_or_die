@@ -46133,12 +46133,10 @@ MonoBehaviour:
   backpack_go_: {fileID: 2068653586}
   hands_go_: {fileID: 1562948594}
   result_bar_: {fileID: 368564656}
-  player_gameobject_: {fileID: 1376435590}
   monsters_gameobject_:
   - {fileID: 1223835629}
   - {fileID: 2128750165}
-  - {fileID: 749816675}
-  - {fileID: 0}
+  player_gameobject_: {fileID: 1376435590}
   state_text_: {fileID: 3489870879076127658}
 --- !u!4 &261837319
 Transform:
@@ -46153,7 +46151,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &325235120
 GameObject:
@@ -46256,9 +46254,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1048675921497175765, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
+      propertyPath: entity_data_so
+      value: 
+      objectReference: {fileID: 11400000, guid: a99cc49c4a9357f4b91bc88d3e40a2d8, type: 2}
+    - target: {fileID: 1048675921497175765, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
+      propertyPath: monsterBehavior_
+      value: 
+      objectReference: {fileID: 11400000, guid: b321ef7541de9f9489c9285e3a69bd75, type: 2}
     - target: {fileID: 5082878245077077952, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
       propertyPath: m_Name
-      value: Purple Slime
+      value: Purple Skull
       objectReference: {fileID: 0}
     - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
       propertyPath: m_RootOrder
@@ -46633,11 +46639,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30606552cda31574d882bb170c51e701, type: 3}
---- !u!1 &749816675 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5082878245077077952, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-  m_PrefabInstance: {fileID: 1588997803}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1035442757 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 604620231198655856, guid: 19b81daade4ccdf4e91054e794e6945f, type: 3}
@@ -47320,63 +47321,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6666301694126842653, guid: c7151baa5817c10478213ca4e80684f0, type: 3}
   m_PrefabInstance: {fileID: 1562948593}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1588997803
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5082878245077077952, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_Name
-      value: Purple Slime (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_RootOrder
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -86
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
 --- !u!1001 &1606346308
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47384,9 +47328,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1048675921497175765, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
+      propertyPath: entity_data_so
+      value: 
+      objectReference: {fileID: 11400000, guid: a99cc49c4a9357f4b91bc88d3e40a2d8, type: 2}
+    - target: {fileID: 1048675921497175765, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
+      propertyPath: monsterBehavior_
+      value: 
+      objectReference: {fileID: 11400000, guid: b321ef7541de9f9489c9285e3a69bd75, type: 2}
     - target: {fileID: 5082878245077077952, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
       propertyPath: m_Name
-      value: Purple Slime (1)
+      value: Purple Skull
       objectReference: {fileID: 0}
     - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
       propertyPath: m_RootOrder
@@ -48381,7 +48333,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2068653586 stripped
 GameObject:
@@ -48615,7 +48567,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6052600640118436612, guid: 4a598a0fe166cbf439500fef32065551, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6052600640118436612, guid: 4a598a0fe166cbf439500fef32065551, type: 3}
       propertyPath: m_LocalPosition.x

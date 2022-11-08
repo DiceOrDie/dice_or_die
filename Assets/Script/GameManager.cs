@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class State {
@@ -18,8 +19,8 @@ public class GameManager : MonoBehaviour
     public GameObject backpack_go_;
     public GameObject hands_go_;
     public GameObject result_bar_;
-    public GameObject player_gameobject_;
     public List<GameObject> monsters_gameobject_;
+    public GameObject player_gameobject_;
     public Text state_text_;
     
 
@@ -72,7 +73,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(GameRoutine());
     }
     IEnumerator GameRoutine() {
-        int cnt = 0;
+        // int cnt = 0;
         flag_is_room_end_ = false;
         while (!flag_is_room_end_) {
             yield return UpdateStateText();
@@ -105,13 +106,17 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Error in GameManager/GameRoutine()/switch-case");
                 break;
             }
-            if(cnt >= 50)
-                break;
-            cnt++;
+            // if(cnt >= 50)
+            //     break;
+            // cnt++;
         }
         game_state_ = GameState.kRoomEnd;
         yield return UpdateStateText();
         Debug.Log("Room End");
+
+        int now_Scene = SceneManager.GetActiveScene().buildIndex;
+        if(now_Scene != 8)
+            SceneManager.LoadScene(now_Scene + 1);
     }
     
     IEnumerator RoomStart() {
@@ -143,6 +148,12 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PlayerSelectDice() {
         // TODO
+        if(!(character_.CanAttack())){
+            Debug.Log("player can't attack");
+            game_state_ = GameState.kPlayerRollDice;
+            yield return null;
+        }
+        Debug.Log(character_.CanAttack());
         Debug.Log("PlayerSelectDice() started.");
         hands_.StartSelect();
         yield return new WaitUntil(() => hands_.is_select_on_going == false);
@@ -154,6 +165,11 @@ public class GameManager : MonoBehaviour
 
     IEnumerator PlayerRollDice() {
         // TODO: roll all dice in rolled_dice_list_
+        if(!character_.CanAttack()){
+            Debug.Log("player can't attack");
+            game_state_ = GameState.kPlayerAttack;
+            yield return null;
+        }
         Debug.Log("PlayerRollDice() started.");
         foreach (Dice dice in rolled_dice_list_) {
             Debug.Log(dice.RollDice());
@@ -169,7 +185,7 @@ public class GameManager : MonoBehaviour
         string attack_damage = "0";
         attack_damage = character_.Attack(rolled_dice_list_, monsters_);
         Debug.Log("Attack: " + attack_damage);
-        if(attack_damage != "0")
+        if(!attack_damage.Equals("0"))
             yield return monsters_[0].ShowDamageText();
         for(int i = 0; i < monsters_.Count; i++) {
             Monster monster = monsters_[i];
@@ -308,7 +324,7 @@ public class GameManager : MonoBehaviour
             else
                 state_text_.text = "You Died.";
             state_text_.gameObject.SetActive(true);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
             state_text_.gameObject.SetActive(false);
             break;
         }

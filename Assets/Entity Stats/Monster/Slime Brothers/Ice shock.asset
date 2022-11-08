@@ -15,7 +15,7 @@ MonoBehaviour:
   behavior_name: Ice shock
   damage: 2
   cold: 0
-  frozen: 1
+  frozen: 2
   burn: 0
   heal: 0
   fragile: 0
