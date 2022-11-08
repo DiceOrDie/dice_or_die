@@ -115,9 +115,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("Room End");
 
         if(character_.IsAlive())
+        {
             int now_Scene = SceneManager.GetActiveScene().buildIndex;
             if(now_Scene != 8)
                 SceneManager.LoadScene(now_Scene + 1);
+        }
     }
     
     IEnumerator RoomStart() {
