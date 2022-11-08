@@ -9,8 +9,8 @@ public class Entity : MonoBehaviour
     [SerializeField] Text current_HP_text_;
     [SerializeField] Text max_HP_text_;
     [SerializeField] Text damage_text_;
+    [SerializeField] Animator damage_anaimator_;
     EntityData_SO entity_info;
-
 
     #region Read for EntityData_SO
     public int max_HP_
@@ -61,7 +61,10 @@ public class Entity : MonoBehaviour
     }
     public IEnumerator ShowDamageText() {
         damage_text_.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1f);
+        damage_anaimator_.SetBool("show_damage", true);
+        float animationLength = damage_anaimator_.GetCurrentAnimatorStateInfo(0).length - 0.1f;
+        yield return new WaitForSecondsRealtime(animationLength);
+        damage_anaimator_.SetBool("show_damage", false);
         damage_text_.gameObject.SetActive(false);
     }
     // Start is called before the first frame update

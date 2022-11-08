@@ -102,6 +102,7 @@ MonoBehaviour:
   current_HP_text_: {fileID: 1956998358585152219}
   max_HP_text_: {fileID: 7126946180675353044}
   damage_text_: {fileID: 4774027299658762577}
+  damage_anaimator_: {fileID: 8279892037183256780}
   monsterBehavior_: {fileID: 0}
 --- !u!1 &7835792982130748632
 GameObject:
@@ -294,6 +295,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &8279892037183256780 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7611900270662704197, guid: c84a4a36fd3d93b4b9128a4204a5f28a, type: 3}
+  m_PrefabInstance: {fileID: 1966651399033349257}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8573404197893568268 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7903864310011630469, guid: c84a4a36fd3d93b4b9128a4204a5f28a, type: 3}
