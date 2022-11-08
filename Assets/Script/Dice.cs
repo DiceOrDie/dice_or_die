@@ -39,7 +39,7 @@ public class Dice : MonoBehaviour
     public void DiceInit() {
         dice_info_ = new Dice_SO(dice_so_);
     }
-    private void Start() {
+    private void Awake() {
         DiceInit();
     }
     public bool SwitchSelected() {
