@@ -123,32 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &87720475 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7382153046475088226, guid: 8476e465fc732df42bae5ae520d0d28d, type: 3}
-  m_PrefabInstance: {fileID: 3103565201789978350}
-  m_PrefabAsset: {fileID: 0}
---- !u!50 &87720479
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 87720475}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &100502026
 GameObject:
   m_ObjectHideFlags: 0
@@ -46639,6 +46613,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30606552cda31574d882bb170c51e701, type: 3}
+--- !u!1 &712379781 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1301771117509923553, guid: 19b81daade4ccdf4e91054e794e6945f, type: 3}
+  m_PrefabInstance: {fileID: 604620231409393461}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1035442757 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 604620231198655856, guid: 19b81daade4ccdf4e91054e794e6945f, type: 3}
@@ -47053,6 +47032,11 @@ CanvasRenderer:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3103565203166346088, guid: 8476e465fc732df42bae5ae520d0d28d, type: 3}
   m_PrefabInstance: {fileID: 3103565201789978350}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1390139942 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8434873516078500240, guid: 19b81daade4ccdf4e91054e794e6945f, type: 3}
+  m_PrefabInstance: {fileID: 604620231409393461}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1562948593
 PrefabInstance:
@@ -48354,6 +48338,25 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 2068653589, guid: 5e77517b7b605d54fb7de242e1f1afdc, type: 3}
   m_PrefabInstance: {fileID: 609502959}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2089327267 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 604620231198655857, guid: 19b81daade4ccdf4e91054e794e6945f, type: 3}
+  m_PrefabInstance: {fileID: 604620231409393461}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2089327270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089327267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bca59b217960e7a4ab88d610901d6cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dice_area_: {fileID: 712379781}
+  entity_area_: {fileID: 1390139942}
 --- !u!1 &2128750165 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5082878245077077952, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
@@ -48464,7 +48467,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1301771117509923553, guid: 19b81daade4ccdf4e91054e794e6945f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1645767460661262422, guid: 19b81daade4ccdf4e91054e794e6945f, type: 3}
       propertyPath: m_AnchorMax.x
@@ -48667,18 +48670,6 @@ PrefabInstance:
     - target: {fileID: 3103565203166346088, guid: 8476e465fc732df42bae5ae520d0d28d, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6939314622271364320, guid: 8476e465fc732df42bae5ae520d0d28d, type: 3}
-      propertyPath: bullet
-      value: 
-      objectReference: {fileID: 87720475}
-    - target: {fileID: 7382153046475088226, guid: 8476e465fc732df42bae5ae520d0d28d, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8819870765420067150, guid: 8476e465fc732df42bae5ae520d0d28d, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8476e465fc732df42bae5ae520d0d28d, type: 3}

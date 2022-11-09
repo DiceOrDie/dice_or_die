@@ -51,10 +51,18 @@ public class Hands : MonoBehaviour
 
     public void OnRollButton()
     {
-        diceInHands.RemoveAt(0);
-        UpdateUI();
+
         Debug.Log("Dice or Die!");
         mask_.SetActive(true);
+        for(int i = 0; i < dice_list_.Count; i++){
+            if(dice_list_[i].selected_)
+            {
+                selected_dice_.Add(dice_list_[i]);
+                // dice_list_[i].gameObject.SetActive(false);
+                dice_list_.RemoveAt(i);
+                i--;
+            }
+        }
         is_select_on_going = false;
     }//OnRollButton
 
