@@ -34,8 +34,23 @@ public class Hands : MonoBehaviour
 
     public void OnRollButton()
     {
+<<<<<<< Updated upstream
         diceInHands.RemoveAt(0);
         UpdateUI();
+=======
+        /* move selected dice from diceInHands to selectedDice */
+        for(int i = 0; i < dice_list_.Count; i++){
+            if(dice_list_[i].selected_)
+            {
+                selected_dice_.Add(dice_list_[i]);
+                // dice_list_[i].gameObject.SetActive(false);
+                dice_list_.RemoveAt(i);
+                i--;
+            }
+        }
+
+        // UpdateUI();
+>>>>>>> Stashed changes
         Debug.Log("Dice or Die!");
     }//OnRollButton
 
