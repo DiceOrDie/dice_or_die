@@ -44,7 +44,7 @@ public class Entity : MonoBehaviour
         animator_.SetTrigger("die");
         float animationLength = animator_.GetCurrentAnimatorStateInfo(0).length - 0.1f;
         yield return new WaitForSecondsRealtime(animationLength);
-        Destroy(this);
+        Destroy(gameObject);
     }
     public Dictionary<string, int> state_ = new Dictionary<string, int>()
     {

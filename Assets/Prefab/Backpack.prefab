@@ -202,8 +202,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.0000038146973}
-  m_SizeDelta: {x: 0, y: 268.28}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 1079.1558}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &7843730211085395956
 MonoBehaviour:
@@ -313,6 +313,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5862525294446202752}
   - component: {fileID: 5862525294446202753}
+  - component: {fileID: 2068653589}
   m_Layer: 5
   m_Name: Backpack
   m_TagString: Untagged
@@ -381,6 +382,26 @@ MonoBehaviour:
   is_draw_on_going_: 0
   backpack_gameobject_: {fileID: 5862525294446202759}
   draw_dice_count_: 2
+--- !u!95 &2068653589
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5862525294446202759}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b9105bf2ace8b7543b8115a5656ba2af, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6161148164645009765
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,7 +727,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 4566603016929231134}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.99999976
+  m_Size: 0.24732745
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -751,7 +772,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -0.0000076293945, y: 0.000007613562}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3764499924943635800
 CanvasRenderer:

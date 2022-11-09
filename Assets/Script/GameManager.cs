@@ -194,7 +194,7 @@ public class GameManager : MonoBehaviour
             Monster monster = monsters_[i];
             if (!monster.IsAlive()) {
                 monsters_.Remove(monster);
-                monster.Die();
+                yield return monster.Die();
                 // Destroy(monster.gameObject);
                 i--;
             }

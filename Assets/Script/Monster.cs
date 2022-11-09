@@ -81,6 +81,8 @@ public class Monster : Entity
         character.state_["fragile"] += now_attack.fragile;
         character.state_["paralysis"] += now_attack.paralysis;
         current_HP_ += now_attack.heal;
+        if(current_HP_ > max_HP_)
+            current_HP_ = max_HP_;
         animator_.SetTrigger("attack");
 
 
