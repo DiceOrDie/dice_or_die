@@ -73,7 +73,6 @@ public class GameManager : MonoBehaviour
         StartCoroutine(GameRoutine());
     }
     IEnumerator GameRoutine() {
-        // int cnt = 0;
         flag_is_room_end_ = false;
         while (!flag_is_room_end_) {
             yield return UpdateStateText();
@@ -106,9 +105,6 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Error in GameManager/GameRoutine()/switch-case");
                 break;
             }
-            // if(cnt >= 50)
-            //     break;
-            // cnt++;
         }
         game_state_ = GameState.kRoomEnd;
         yield return UpdateStateText();

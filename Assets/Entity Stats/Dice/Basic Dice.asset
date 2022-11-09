@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 235b21a733a9df54bb541a947ef16cad, type: 3}
   m_Name: Basic Dice
   m_EditorClassIdentifier: 
+  sprite_: {fileID: 21300000, guid: e6ba6414e0e752e4197f842c757156ee, type: 3}
   type_: 0
+  name_: Basic Dice
   min_point_: 1
   max_point_: 6
   point_: -1

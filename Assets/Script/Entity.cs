@@ -12,7 +12,9 @@ public class Entity : MonoBehaviour
     [SerializeField] public Animator animator_;
     [SerializeField] AudioSource hurt_sound_;
     [SerializeField] AudioSource die_sound_;
-    EntityData_SO entity_info;
+    
+    [HideInInspector]
+    public EntityData_SO entity_info;
 
     #region Read for EntityData_SO
     public int max_HP_
@@ -85,5 +87,10 @@ public class Entity : MonoBehaviour
     //     return damage;
     // }
 
-    
+    void OnMouseDown()
+    {
+        InfoPanel info_panel_ = InfoPanel.instance;
+        info_panel_.UpdateEntityInfo(this);
+        return;
+    }
 }
