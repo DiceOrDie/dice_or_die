@@ -23,6 +23,7 @@ public class Hands : MonoBehaviour
     public Button rollButton;
     public Transform itemsParent;
     public bool is_select_on_going;
+    public int hands_limit_ = 10;
     [SerializeField] GameObject mask_;
     // Image[] slots;
     List<GameObject> dice_o_list_;
@@ -83,7 +84,7 @@ public class Hands : MonoBehaviour
 
     public bool Add(GameObject dice_gameobject)
     {
-        if (dice_list_.Count >= 10)
+        if (dice_list_.Count >= hands_limit_)
         {
             Destroy(dice_gameobject);
             Debug.Log("Hands full.");

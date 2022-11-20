@@ -43,8 +43,8 @@ public class InfoPanel : MonoBehaviour
 
     public void UpdateDiceInfo(Dice dice)
     {
-        dice_image_.sprite = dice.dice_info_.sprite_;
-        dice_name_.text = dice.dice_info_.name_;
+        dice_image_.sprite = dice.sprite_;
+        dice_name_.text = dice.name_;
         entity_area_.SetActive(false);
         dice_area_.SetActive(true);
     }//UpdateDiceInfo

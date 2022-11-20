@@ -9,6 +9,19 @@ using UnityEngine.SceneManagement;
 public class State {
     DiceChance dice_chance;
     RollChance roll_chance;
+    List<Dice> roll_result;
+    List<Skill> bonus_skill;
+    int bonus_attack_count;
+}
+
+public class RoundLog {
+    public State state;
+    public List<Dice> dices;
+    public EntityData_SO plyer_info;
+    public List<Skill> active_skill;
+    public List<EntityData_SO> monsters_info;
+    public List<MonsterBehavior_SO> monsters_behaviors;
+
 }
 
 

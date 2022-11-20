@@ -4,14 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
-public class DiceChance {
+public class DiceChance
+{
     public float odd_dice_ = 0.0f;
     public float even_dice_ = 0.0f;
     public float cheat_dice_ = 0.0f;
     public float normal_dice_ = 100.0f;
 }
 [System.Serializable]
-public class RollChance{
+public class RollChance
+{
     public float odd_p = 0.0f;
     public float even_p = 0.0f;
 }
@@ -21,7 +23,7 @@ public class Backpack : MonoBehaviour
     #region Singleton
 
     public static Backpack instance;
-    
+
     void Awake()
     {
         if (instance != null)
@@ -44,6 +46,7 @@ public class Backpack : MonoBehaviour
     //                               new Dice(DiceType.fire), new Dice(DiceType.fire), new Dice(DiceType.fire), new Dice(DiceType.fire), new Dice(DiceType.fire),
     //                               new Dice(DiceType.water), new Dice(DiceType.water), new Dice(DiceType.water), new Dice(DiceType.water), new Dice(DiceType.water),
     //                               new Dice(DiceType.grass), new Dice(DiceType.grass), new Dice(DiceType.grass), new Dice(DiceType.grass), new Dice(DiceType.grass) };
+    public GameObject basic_dice_prefab_;
     public List<GameObject> dice_initial_;
     private List<GameObject> own_dice_gameobject_ = new List<GameObject>();
     // private List<Dice> diceAvailable = new List<Dice>();
@@ -52,7 +55,8 @@ public class Backpack : MonoBehaviour
     public bool is_draw_on_going_ = false;
 
     public GameObject backpack_gameobject_;
-    public int draw_dice_count_ = 2;
+    public int draw_dice_count_ = 1;
+    public int draw_basic_dice_count_ = 1;
 
     void Start()
     {
@@ -103,15 +107,17 @@ public class Backpack : MonoBehaviour
         {
             Debug.Log("There are still some dice in the backpack. Not refilling.");
         }//else
-        
+
         //Debug.Log("Dice initial: " + diceAvailable.Count);
         //Debug.Log("Dice initial: " + DiceType.fire);
         //Debug.Log("Dice available: " + diceAvailable.Count);
 
         return;
     }//Refill
-    public GameObject PickDice() {
-        if (own_dice_gameobject_.Count == 0) {
+    public GameObject PickDice()
+    {
+        if (own_dice_gameobject_.Count == 0)
+        {
             Refill();
         }
         int rand = Random.Range(0, own_dice_gameobject_.Count);
@@ -124,12 +130,18 @@ public class Backpack : MonoBehaviour
 
         Debug.Log("Draw!\n");
 
-        for (int i = 0; i < draw_dice_count_; i++){
+        for (int i = 0; i < draw_dice_count_; i++)
+        {
             GameObject dice = PickDice();
             own_dice_gameobject_.Remove(dice);
             Hands.instance.Add(dice);
         }
-        
+        for (int i = 0; i < draw_basic_dice_count_; i++)
+        {
+            GameObject dice = Instantiate(basic_dice_prefab_, hands_parent_);
+            Hands.instance.Add(dice);
+        }
+
         // rand = Random.Range(0, diceAvailable.Count);
         // diceDrawn1 = diceAvailable[rand];
         // diceAvailable.RemoveAt(rand);
@@ -147,7 +159,7 @@ public class Backpack : MonoBehaviour
 
         // drawButtonImage.enabled = false;
         // backpack_gameobject_.SetActive(false);
-        
+
         // UpdateUI();
 
         is_draw_on_going_ = false;

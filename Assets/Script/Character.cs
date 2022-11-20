@@ -9,7 +9,7 @@ public class Character : Entity
     // public GameObject bullet;
     public bool CanAttack()
     {
-        if(this.state_["frozen"] > 0 || this.state_["paralysis"] > 0)
+        if(this.debuffs_["frozen"] > 0 || this.debuffs_["paralysis"] > 0)
             return false;
         else
             return true;
@@ -36,25 +36,27 @@ public class Character : Entity
 
     public void UpdateState()
     {
-        if(this.state_["burn"] > 0)
+        if(this.debuffs_["burn"] > 0)
         {
-            current_HP_ -= this.state_["burn"];
-            this.state_["burn"]--;
+            current_HP_ -= this.debuffs_["burn"];
+            this.debuffs_["burn"]--;
         }
 
-        if(this.state_["frozen"] > 0)
+        if(this.debuffs_["frozen"] > 0)
         {
-            this.state_["frozen"]--;
+            this.debuffs_["frozen"]--;
         }
 
-        if(this.state_["paralysis"] > 0)
+        if(this.debuffs_["paralysis"] > 0)
         {
-            this.state_["paralysis"]--;
+            this.debuffs_["paralysis"]--;
         }
 
-        if(this.state_["cold"] >= 8) {
-            this.state_["cold"] -= 8;
-            this.state_["frozen"]++;
+        if(this.debuffs_["cold"] >= 8) {
+            this.debuffs_["cold"] -= 8;
+            this.debuffs_["frozen"]++;
         }
     }
+
+    
 }

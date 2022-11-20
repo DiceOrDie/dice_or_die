@@ -7,7 +7,10 @@ public enum DiceType
     normal,
     fire,
     water,
-    grass
+    grass,
+    odd,
+    even,
+    cheat
 }
 
 [CreateAssetMenu(fileName = "Dice Data", menuName = "Dice/Dice Data")]

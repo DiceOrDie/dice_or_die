@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Dice : MonoBehaviour
 {
     [SerializeField]
-    Dice_SO dice_so_;
+    private Dice_SO dice_so_;
     [SerializeField]
     private Image selected_pannel_;
     private InfoPanel info_panel_ = InfoPanel.instance;
@@ -33,8 +33,18 @@ public class Dice : MonoBehaviour
         get { if(dice_info_) return dice_info_.point_; else return 0; }
         set { dice_info_.point_ = value; }
     }
+    public Sprite sprite_
+    {
+        get { if(dice_info_) return dice_info_.sprite_; else return null; }
+        set { dice_info_.sprite_ = value; }
+    }
+    public string name_
+    {
+        get { if(dice_info_) return dice_info_.name_; else return null; }
+        set { dice_info_.name_ = value; }
+    }
     #endregion
-    public Dice_SO dice_info_;
+    private Dice_SO dice_info_;
     public void DiceInit() {
         dice_info_ = new Dice_SO(dice_so_);
     }
@@ -57,6 +67,16 @@ public class Dice : MonoBehaviour
     }
     public int RollDice () {
         point_ = Random.Range(min_point_, max_point_);
+        switch(type_) {
+            case DiceType.even:
+                point_ = (point_ % 2 == 0) ? point_: point_ + 1;
+                break;
+            case DiceType.odd:
+                point_ = (point_ % 2 == 0) ? point_ + 1 : point_;
+                break;
+            default:
+                break;
+        }
         gameObject.GetComponent<Image>().enabled = false;
 
         GameObject roll_result_text = Instantiate(new GameObject(gameObject.name + "_result"), transform);

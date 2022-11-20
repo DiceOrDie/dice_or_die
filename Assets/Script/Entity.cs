@@ -13,6 +13,14 @@ public class Entity : MonoBehaviour
     [SerializeField] AudioSource hurt_sound_;
     [SerializeField] AudioSource die_sound_;
     
+    // public Dictionary<string, int> debuffs_ = new Dictionary<string, int>()
+    // {
+    //     { "cold",      0 }, //寒冷
+    //     { "frozen",    0 }, //凍結
+    //     { "burn",      0 }, //燃燒
+    //     { "fragile",   0 }, //易碎
+    //     { "paralysis", 0 }, //麻痺
+    // };
     [HideInInspector]
     public EntityData_SO entity_info;
 
@@ -32,6 +40,11 @@ public class Entity : MonoBehaviour
         get { if(entity_info) return entity_info.base_attack_; else return 0; }
         set { entity_info.base_attack_ = value; }
     }
+    public Dictionary<string, int> debuffs_
+    {
+        get { if(entity_info) return entity_info.debuffs_; else return null; }
+        set { entity_info.debuffs_ = value; }
+    }
     #endregion
     public void EntityInit() {
         entity_info = new EntityData_SO(entity_data_so);
@@ -48,14 +61,6 @@ public class Entity : MonoBehaviour
         yield return new WaitForSecondsRealtime(animationLength);
         Destroy(gameObject);
     }
-    public Dictionary<string, int> state_ = new Dictionary<string, int>()
-    {
-        { "cold",      0 }, //寒冷
-        { "frozen",    0 }, //凍結
-        { "burn",      0 }, //燃燒
-        { "fragile",   0 }, //易碎
-        { "paralysis", 0 }, //麻痺
-    };
     public void PlayHurtSound() {
         hurt_sound_.Play();
     }

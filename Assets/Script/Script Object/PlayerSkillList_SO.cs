@@ -18,3 +18,6 @@ public class PlayerSkillList_SO : ScriptableObject
     // public List<Skill> gamestart_ = new List<Skill>();
 
 }
+
+public interface IPlayerSkill {
+}

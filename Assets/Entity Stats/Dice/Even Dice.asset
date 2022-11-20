@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 235b21a733a9df54bb541a947ef16cad, type: 3}
-  m_Name: Basic Dice
+  m_Name: Even Dice
   m_EditorClassIdentifier: 
-  sprite_: {fileID: 21300000, guid: e6ba6414e0e752e4197f842c757156ee, type: 3}
-  type_: 0
-  name_: "\u666E\u901A\u9AB0"
+  sprite_: {fileID: 21300000, guid: 08b5881b9ad6d74409504598fb51e422, type: 3}
+  type_: 5
+  name_: "\u5076\u6578\u9AB0"
   min_point_: 1
   max_point_: 6
   point_: -1
