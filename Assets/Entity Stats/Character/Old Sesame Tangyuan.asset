@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42c83fef1b8d7944cab9098cae8367a5, type: 3}
-  m_Name: New Skill List
+  m_Script: {fileID: 11500000, guid: 8247f479941afbc4db5adcc3d6c75002, type: 3}
+  m_Name: Old Sesame Tangyuan
   m_EditorClassIdentifier: 
-  skill_list:
-  - id: 0
-    name: 
-    level: 0
+  sprite_: {fileID: 21300000, guid: 88002c76394f85347838a99237e32395, type: 3}
+  name_: "\u829D\u9EBB\u6E6F\u5713"
+  max_HP_: 100
+  current_HP_: 100
+  base_attack_: 4

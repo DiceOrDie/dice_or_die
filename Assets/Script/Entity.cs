@@ -6,48 +6,48 @@ using UnityEngine.UI;
 public class Entity : MonoBehaviour
 {
     [SerializeField] EntityData_SO entity_data_so;
-    [SerializeField] Text current_HP_text_;
-    [SerializeField] Text max_HP_text_;
-    [SerializeField] Text damage_text_;
+    [SerializeField] protected Text current_HP_text_;
+    [SerializeField] protected Text max_HP_text_;
+    [SerializeField] protected Text damage_text_;
     [SerializeField] public Animator animator_;
-    [SerializeField] AudioSource hurt_sound_;
-    [SerializeField] AudioSource die_sound_;
+    [SerializeField] protected AudioSource hurt_sound_;
+    [SerializeField] protected AudioSource die_sound_;
     
-    // public Dictionary<string, int> debuffs_ = new Dictionary<string, int>()
-    // {
-    //     { "cold",      0 }, //寒冷
-    //     { "frozen",    0 }, //凍結
-    //     { "burn",      0 }, //燃燒
-    //     { "fragile",   0 }, //易碎
-    //     { "paralysis", 0 }, //麻痺
-    // };
+    public Dictionary<string, int> debuffs_ = new Dictionary<string, int>()
+    {
+        { "cold",      0 }, //寒冷
+        { "frozen",    0 }, //凍結
+        { "burn",      0 }, //燃燒
+        { "fragile",   0 }, //易碎
+        { "paralysis", 0 }, //麻痺
+    };
     [HideInInspector]
     public EntityData_SO entity_info;
 
     #region Read for EntityData_SO
-    public int max_HP_
+    public virtual int max_HP_
     {
         get { if(entity_info) return entity_info.max_HP_; else return 0; }
         set { entity_info.max_HP_ = value; max_HP_text_.text = value.ToString(); }
     }
-    public int current_HP_
+    public virtual int current_HP_
     {
         get { if(entity_info) return entity_info.current_HP_; else return 0; }
         set { entity_info.current_HP_ = value; current_HP_text_.text = value.ToString(); }
     }
-    public int base_attack_
+    public virtual int base_attack_
     {
         get { if(entity_info) return entity_info.base_attack_; else return 0; }
         set { entity_info.base_attack_ = value; }
     }
-    public Dictionary<string, int> debuffs_
-    {
-        get { if(entity_info) return entity_info.debuffs_; else return null; }
-        set { entity_info.debuffs_ = value; }
-    }
+    // public virtual Dictionary<string, int> debuffs_
+    // {
+    //     get { if(entity_info) return entity_info.debuffs_; else return null; }
+    //     set { entity_info.debuffs_ = value; }
+    // }
     #endregion
     public void EntityInit() {
-        entity_info = new EntityData_SO(entity_data_so);
+        entity_info = Instantiate(entity_data_so);
         current_HP_text_.text = current_HP_.ToString();
         max_HP_text_.text = max_HP_.ToString();
     }

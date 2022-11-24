@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8247f479941afbc4db5adcc3d6c75002, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f25a67e2c1ad824e8351b34e6d4b2a4, type: 3}
   m_Name: Sesame Tangyuan
   m_EditorClassIdentifier: 
   sprite_: {fileID: 21300000, guid: 88002c76394f85347838a99237e32395, type: 3}
@@ -17,3 +17,13 @@ MonoBehaviour:
   max_HP_: 100
   current_HP_: 100
   base_attack_: 4
+  character: 0
+  skill_list:
+  - name: 0
+    id: 1
+    level: 1
+    action_state: 6
+  - name: 1
+    id: 2
+    level: 1
+    action_state: 0

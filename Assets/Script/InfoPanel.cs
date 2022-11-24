@@ -27,6 +27,8 @@ public class InfoPanel : MonoBehaviour
     
     private Image dice_image_;
     private Text dice_name_;
+    private Text dice_min_attack_;
+    private Text dice_max_attack_;
 
     private Image entity_image_;
     private Text entity_name_;
@@ -35,6 +37,9 @@ public class InfoPanel : MonoBehaviour
     {
         dice_image_ = GameObject.Find("InfoPanel/Dice/Title/Icon").GetComponent<Image>();
         dice_name_ = GameObject.Find("InfoPanel/Dice/Title/Name").GetComponent<Text>();
+        dice_min_attack_ = GameObject.Find("InfoPanel/Dice/Info/Attack/Min Attack").GetComponent<Text>();
+        dice_max_attack_ = GameObject.Find("InfoPanel/Dice/Info/Attack/Max Attack").GetComponent<Text>();
+
         entity_image_ = GameObject.Find("InfoPanel/Entity/Title/Icon").GetComponent<Image>();
         entity_name_ = GameObject.Find("InfoPanel/Entity/Title/Name").GetComponent<Text>();
         dice_area_.SetActive(false);
@@ -45,6 +50,8 @@ public class InfoPanel : MonoBehaviour
     {
         dice_image_.sprite = dice.sprite_;
         dice_name_.text = dice.name_;
+        dice_min_attack_.text = (dice.min_point_ + dice.min_point_bonus).ToString();
+        dice_max_attack_.text = (dice.max_point_ + dice.max_point_bonus).ToString();
         entity_area_.SetActive(false);
         dice_area_.SetActive(true);
     }//UpdateDiceInfo

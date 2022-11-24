@@ -11,6 +11,9 @@ public class Dice : MonoBehaviour
     private Image selected_pannel_;
     private InfoPanel info_panel_ = InfoPanel.instance;
     public bool selected_ = false;
+
+    public int min_point_bonus=0;
+    public int max_point_bonus=0;
     
     #region Read for dice_so_
     public DiceType type_
@@ -46,7 +49,7 @@ public class Dice : MonoBehaviour
     #endregion
     private Dice_SO dice_info_;
     public void DiceInit() {
-        dice_info_ = new Dice_SO(dice_so_);
+        dice_info_ = Instantiate(dice_so_);
     }
     private void Awake() {
         DiceInit();
@@ -66,7 +69,7 @@ public class Dice : MonoBehaviour
         return selected_;
     }
     public int RollDice () {
-        point_ = Random.Range(min_point_, max_point_);
+        point_ = Random.Range(min_point_+min_point_bonus, max_point_+max_point_bonus);
         switch(type_) {
             case DiceType.even:
                 point_ = (point_ % 2 == 0) ? point_: point_ + 1;

@@ -13,7 +13,9 @@ public enum DiceType
     cheat
 }
 
+
 [CreateAssetMenu(fileName = "Dice Data", menuName = "Dice/Dice Data")]
+[System.Serializable]
 public class Dice_SO : ScriptableObject
 {
     [Header("Dice Info")]
