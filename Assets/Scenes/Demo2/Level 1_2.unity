@@ -48745,6 +48745,10 @@ PrefabInstance:
       propertyPath: bullet
       value: 
       objectReference: {fileID: 87720475}
+    - target: {fileID: 6939314622271364320, guid: 8476e465fc732df42bae5ae520d0d28d, type: 3}
+      propertyPath: character_data_so
+      value: 
+      objectReference: {fileID: 11400000, guid: 2af7921625089cc45aa93539b043ef75, type: 2}
     - target: {fileID: 7382153046475088226, guid: 8476e465fc732df42bae5ae520d0d28d, type: 3}
       propertyPath: m_IsActive
       value: 0

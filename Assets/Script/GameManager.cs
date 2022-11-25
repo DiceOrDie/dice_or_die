@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class State {
+    public int round_count = 0;
     public DiceChance dice_chance;
     public RollChance roll_chance;
     public List<Dice> roll_result;
@@ -100,6 +101,10 @@ public class GameManager : MonoBehaviour
         }
         instance = this;
         DontDestroyOnLoad(this);
+        DontDestroyOnLoad(backpack_go_);
+        DontDestroyOnLoad(hands_go_);
+        DontDestroyOnLoad(player_gameobject_);
+        // DontDestroyOnLoad(this);
         
     }
     void Start() {
@@ -179,6 +184,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("RoundStart() started.");
         Debug.Log("RoundStart() finished.");
         state.game_state = GameState.kPlayerDrawDice;
+        state.round_count += 1;
         yield return null;
     }
 
@@ -187,6 +193,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("PlayerDrawDice() started.");
         backpack_.StartDraw();
         yield return new WaitUntil(() => backpack_.is_draw_on_going_ == false);
+        foreach (Skill_base skill in player_.skill_list)
+        {
+            Debug.Log("技能檢測");
+            yield return skill.Effect(state);
+        }
         Debug.Log("PlayerDrawDice() finished.");
         state.game_state = GameState.kPlayerSelectDice;
         //yield return null;
@@ -374,9 +385,7 @@ public class GameManager : MonoBehaviour
             // state_text_.gameObject.SetActive(false);
             break;
         case GameState.kRoomEnd:
-            if(player_.IsAlive())
-                state_text_.text = "You Win!";
-            else
+            if(!player_.IsAlive())
                 state_text_.text = "You Died.";
             state_text_.gameObject.SetActive(true);
             yield return new WaitForSeconds(2f);

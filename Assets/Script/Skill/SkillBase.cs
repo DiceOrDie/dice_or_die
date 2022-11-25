@@ -5,7 +5,13 @@ using System;
 
 public enum SkillTable{
     SesamePunch,
-    AddPoint
+    AddPoint,
+    AddHP,
+    AddAttack,
+    AddRoundDice,
+    AddHandDice,
+    AddDropFish
+
 }
 
 [System.Serializable]
@@ -53,6 +59,7 @@ public class Skill_SesamePunch : Skill_base
     public override IEnumerator Effect(State state)
     {
         if(isValid(state)) {
+            last_used = state.round_count;
             int damage = (int)Math.Pow(2, state.roll_result.Count);
             Debug.Log("芝麻拳 : -"+damage.ToString());
             GameManager.instance.monsters[0].getDamage(-damage);
@@ -64,7 +71,6 @@ public class Skill_SesamePunch : Skill_base
 
 public class Skill_AddPoint : Skill_base
 {
-    public int last_used = 0;
     public Skill_AddPoint(Skill_base data) : base(data){
         id = 2;
         name = SkillTable.AddPoint;
@@ -73,7 +79,7 @@ public class Skill_AddPoint : Skill_base
     public override bool isValid(State state)
     {
         Debug.Log("髒髒檢測");
-        if(state.game_state != action_state) return false;
+        if(state.game_state != action_state && level > 0) return false;
         return true;
     }
     public override IEnumerator Effect(State state)
@@ -90,6 +96,111 @@ public class Skill_AddPoint : Skill_base
                     dice.max_point_bonus = level;
                 }
             }
+            yield return null;
+        }
+    }
+}
+
+public class Skill_AddHP : Skill_base
+{
+    public Skill_AddHP(Skill_base data) : base(data){
+        id = 3;
+        name = SkillTable.AddHP;
+        action_state = GameState.kRoomStart;
+    }
+    public override bool isValid(State state)
+    {
+        Debug.Log("胖胖檢測");
+        if(state.game_state != action_state && level > 0) return false;
+        return true;
+    }
+    public override IEnumerator Effect(State state)
+    {
+        if(isValid(state))
+        {
+            GameManager.instance.player.max_HP_ += (10 + 10 * level);
+            GameManager.instance.player.current_HP_ = GameManager.instance.player.max_HP_;
+            yield return null;
+        }
+    }
+}
+
+public class Skill_AddAttack : Skill_base
+{
+    public Skill_AddAttack(Skill_base data) : base(data){
+        id = 4;
+        name = SkillTable.AddAttack;
+        action_state = GameState.kRoomStart;
+    }
+    public override bool isValid(State state)
+    {
+        Debug.Log("爪爪檢測");
+        if(state.game_state != action_state && level > 0) return false;
+        return true;
+    }
+    public override IEnumerator Effect(State state)
+    {
+        if(isValid(state))
+        {
+            GameManager.instance.player.base_attack_ += level;
+            yield return null;
+        }
+    }
+}
+
+public class Skill_AddRoundDice : Skill_base
+{
+    public Skill_AddRoundDice(Skill_base data) : base(data){
+        id = 4;
+        name = SkillTable.AddRoundDice;
+        action_state = GameState.kPlayerDrawDice;
+    }
+    public override bool isValid(State state)
+    {
+        Debug.Log("飯飯檢測");
+        if(state.game_state != action_state && level > 0) return false;
+        return true;
+    }
+    public override IEnumerator Effect(State state)
+    {
+        if(isValid(state))
+        {
+            GameObject dice1 = GameManager.Instantiate(GameManager.instance.backpack.basic_dice_prefab_, GameManager.instance.backpack.hands_parent_);
+            Hands.instance.Add(dice1);
+            if(level >= 2){
+                if(UnityEngine.Random.Range(0,1) == 1)
+                {
+                    GameObject dice2 = GameManager.Instantiate(GameManager.instance.backpack.basic_dice_prefab_, GameManager.instance.backpack.hands_parent_);
+                    Hands.instance.Add(dice2);
+                }
+                else if(level == 3) {
+                    GameObject dice2 = GameManager.instance.backpack.PickDice();
+                    Hands.instance.Add(dice2);
+                }
+            }
+            yield return null;
+        }
+    }
+}
+
+public class Skill_AddHandDice : Skill_base
+{
+    public Skill_AddHandDice(Skill_base data) : base(data){
+        id = 4;
+        name = SkillTable.AddHandDice;
+        action_state = GameState.kRoomStart;
+    }
+    public override bool isValid(State state)
+    {
+        Debug.Log("倉鼠檢測");
+        if(state.game_state != action_state && level > 0) return false;
+        return true;
+    }
+    public override IEnumerator Effect(State state)
+    {
+        if(isValid(state))
+        {
+            GameManager.instance.hands.hands_limit_ += 1 + 1 * level;
             yield return null;
         }
     }

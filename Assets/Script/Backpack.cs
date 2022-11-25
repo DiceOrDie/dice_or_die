@@ -121,7 +121,9 @@ public class Backpack : MonoBehaviour
             Refill();
         }
         int rand = Random.Range(0, own_dice_gameobject_.Count);
-        return own_dice_gameobject_[rand];
+        GameObject dice = own_dice_gameobject_[rand];
+        own_dice_gameobject_.Remove(dice);
+        return dice;
     }
     public void OnDrawButton()
     {
@@ -133,7 +135,6 @@ public class Backpack : MonoBehaviour
         for (int i = 0; i < draw_dice_count_; i++)
         {
             GameObject dice = PickDice();
-            own_dice_gameobject_.Remove(dice);
             Hands.instance.Add(dice);
         }
         for (int i = 0; i < draw_basic_dice_count_; i++)
