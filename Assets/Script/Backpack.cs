@@ -52,6 +52,7 @@ public class Backpack : MonoBehaviour
     // private List<Dice> diceAvailable = new List<Dice>();
     DiceSlot[] slots_;
 
+    [HideInInspector]
     public bool is_draw_on_going_ = false;
 
     public GameObject backpack_gameobject_;

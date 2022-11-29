@@ -233,17 +233,24 @@ public class GameManager : MonoBehaviour
             Debug.Log(point);
         }
         state.roll_result = rolled_dice_list_;
+
         Debug.Log("PlayerRollDice() finished.");
         state.game_state = GameState.kPlayerAttack;
         yield return null;
     }
 
     IEnumerator PlayerAttack() {
+        
         Debug.Log("PlayerAttack() started.");
 
         string attack_damage = "0";
         attack_damage = player_.Attack(rolled_dice_list_, monsters_);
         Debug.Log("Attack: " + attack_damage);
+
+        // yield return new WaitForSeconds(2);
+        DisplayAttackSummation(attack_damage);
+        // yield return new WaitForSeconds(2);
+
         if(!attack_damage.Equals("0"))
             yield return monsters_[0].ShowDamageText();
         
@@ -302,6 +309,7 @@ public class GameManager : MonoBehaviour
         foreach ( Dice dice in rolled_dice_list_) {
             Destroy(dice.gameObject);
         }
+        CleanRollResult();
         isGameEnd();
         Debug.Log("RoundEnd() finished.");
         // TODO: RoundStart
@@ -393,5 +401,32 @@ public class GameManager : MonoBehaviour
             break;
         }
 
+    }
+
+    void DisplayAttackSummation(string attack_damage) {
+        // foreach (Dice dice in rolled_dice_list_) {
+        //     dice.gameObject.SetActive(false);
+        // }
+
+        GameObject playerIcon = GameObject.Find("Player Icon");
+        playerIcon.GetComponent<Image>().enabled = true;
+        playerIcon.GetComponent<Image>().sprite = GameObject.Find("Player/Sprite").GetComponent<SpriteRenderer>().sprite;
+
+        GameObject attackSumText = GameObject.Find("Attack Sum Text");
+        attackSumText.GetComponent<Text>().enabled = true;
+        attackSumText.GetComponent<Text>().text = "= " + attack_damage;
+        Debug.Log(attackSumText.GetComponent<Text>().text);
+        attackSumText.GetComponent<Text>().font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+        attackSumText.GetComponent<Text>().horizontalOverflow = HorizontalWrapMode.Overflow;
+        attackSumText.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
+        attackSumText.GetComponent<Text>().fontSize = 60;
+        attackSumText.transform.SetSiblingIndex(rolled_dice_list_.Count + 1);
+
+        return;
+    }
+
+    void CleanRollResult() {
+        GameObject.Find("Player Icon").GetComponent<Image>().enabled = false;
+        GameObject.Find("Attack Sum Text").GetComponent<Text>().enabled = false;
     }
 }
