@@ -27,7 +27,7 @@ public class EntityData_SO : ScriptableObject
     public int max_HP_;
     public int current_HP_;
     public int base_attack_;
-
+    public int fish_nums_;
     
     public EntityData_SO(EntityData_SO data) {
         sprite_ = data.sprite_;
@@ -35,5 +35,6 @@ public class EntityData_SO : ScriptableObject
         max_HP_ = data.max_HP_;
         current_HP_ = data.current_HP_;
         base_attack_ = data.base_attack_;
+        fish_nums_ = data.fish_nums_;
     }
 }

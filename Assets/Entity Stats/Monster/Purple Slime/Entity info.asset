@@ -17,3 +17,4 @@ MonoBehaviour:
   max_HP_: 20
   current_HP_: 20
   base_attack_: 0
+  fish_nums_: 4

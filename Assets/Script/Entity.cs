@@ -40,6 +40,13 @@ public class Entity : MonoBehaviour
         get { if(entity_info) return entity_info.base_attack_; else return 0; }
         set { entity_info.base_attack_ = value; }
     }
+
+    public virtual int fish_nums_
+    {
+        get { if(entity_info) return entity_info.fish_nums_; else return 0; }
+        set { entity_info.base_attack_ = value; }
+    }
+
     // public virtual Dictionary<string, int> debuffs_
     // {
     //     get { if(entity_info) return entity_info.debuffs_; else return null; }
@@ -78,6 +85,10 @@ public class Entity : MonoBehaviour
         }
         return current_HP_;
     }
+    public int GetFishNum() {
+        return fish_nums_;
+    }
+
     public IEnumerator ShowDamageText() {
         animator_.SetTrigger("hurt");
         float animationLength = animator_.GetCurrentAnimatorStateInfo(0).length - 0.1f;

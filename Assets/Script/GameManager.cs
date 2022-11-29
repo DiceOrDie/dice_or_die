@@ -79,7 +79,7 @@ public class GameManager : MonoBehaviour
     private Character player_;
     private Backpack backpack_;
     private Hands hands_;
-
+    private int room_tmp_fish_;
     public Character player{
         get { return player_; }
     }
@@ -180,6 +180,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("RoomStart() started.");
         PlayerRoomInitialize();
         MonsterRoomInitialize();
+        room_tmp_fish_ = 0;
         foreach (Skill_base skill in player_.skill_list)
         {
             Debug.Log("技能檢測");
@@ -274,6 +275,7 @@ public class GameManager : MonoBehaviour
         for(int i = 0; i < monsters_.Count; i++) {
             Monster monster = monsters_[i];
             if (!monster.IsAlive()) {
+                room_tmp_fish_ += monster.GetFishNum();
                 monsters_.Remove(monster);
                 yield return monster.Die();
                 // Destroy(monster.gameObject);
@@ -310,7 +312,10 @@ public class GameManager : MonoBehaviour
         for(int i = 0; i < monsters_.Count; i++) {
             Monster monster = monsters_[i];
             monster.UpdateState();
+            Debug.Log("RoundEnd() monster");
             if (!monster.IsAlive()) {
+                Debug.Log("RoundEnd() monster die");
+                room_tmp_fish_ += monster.GetFishNum();
                 monsters_.Remove(monster);
                 monster.Die();
                 // Destroy(monster.gameObject);
@@ -325,6 +330,7 @@ public class GameManager : MonoBehaviour
             state.game_state = GameState.kRoomEnd;
         else 
             state.game_state = GameState.kRoundStart;
+        Debug.Log("當前掉落小魚乾數量：" + room_tmp_fish_.ToString());
         Debug.Log("RoundEnd() finished.");
         yield return null;
     }
@@ -341,9 +347,12 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene(now_Scene + 1);
                 state.game_state = GameState.kRoomStart;
             }
+            player_.GetFish(room_tmp_fish_);
         }
         else
             gameover_flag_ = true;
+        room_tmp_fish_ = 0;
+        Debug.Log("當前身上的小魚乾數量：" + player_.GetFishNum().ToString());
         yield return null;
     }
     

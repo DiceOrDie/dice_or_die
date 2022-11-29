@@ -30,6 +30,13 @@ public class Character : Entity
         get { if(character_info) return character_info.base_attack_; else return 0; }
         set { character_info.base_attack_ = value; }
     }
+
+    public override int fish_nums_
+    {
+        get { if(character_info) return character_info.fish_nums_; else return 0; }
+        set { character_info.base_attack_ = value; }
+    }
+
     // public override Dictionary<string, int> debuffs_
     // {
     //     get { if(character_info) return character_info.debuffs_; else return null; }
@@ -58,10 +65,12 @@ public class Character : Entity
             {
                 case SkillTable.SesamePunch: 
                     index = skill_list.FindIndex(x => x.name == skill.name);
+                    // new_skill_list.Add((Skill_SesamePunch)skill_list[index]);
                     new_skill_list.Add(new Skill_SesamePunch(skill_list[index]));
                     break;
                 case SkillTable.AddPoint:
                     index = skill_list.FindIndex(x => x.name == skill.name);
+                    // new_skill_list.Add((Skill_AddPoint)skill_list[index]);
                     new_skill_list.Add(new Skill_AddPoint(skill_list[index]));
                     break;
                 case SkillTable.AddHP:
@@ -145,6 +154,10 @@ public class Character : Entity
         skill_text.gameObject.SetActive(true);
         yield return new WaitForSeconds(1.0f);
         skill_text.gameObject.SetActive(false);
+    }
+
+    public void GetFish(int fish_num) {
+        this.fish_nums_ += fish_num;
     }
     
 }

@@ -18,6 +18,7 @@ public class Monster : Entity
 
     public Queue<MonsterBehavior_SO> attack_queue_;
 
+
     private void Start() {
         EntityInit();
         attack_queue_ = new Queue<MonsterBehavior_SO>();
