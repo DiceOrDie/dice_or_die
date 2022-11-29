@@ -25,5 +25,25 @@ MonoBehaviour:
     action_state: 6
   - name: 1
     id: 2
-    level: 1
+    level: 3
+    action_state: 0
+  - name: 2
+    id: 2
+    level: 3
+    action_state: 0
+  - name: 3
+    id: 2
+    level: 3
+    action_state: 0
+  - name: 4
+    id: 2
+    level: 3
+    action_state: 0
+  - name: 5
+    id: 2
+    level: 3
+    action_state: 0
+  - name: 6
+    id: 2
+    level: 3
     action_state: 0

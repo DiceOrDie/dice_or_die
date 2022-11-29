@@ -69,7 +69,7 @@ public class Dice : MonoBehaviour
         return selected_;
     }
     public int RollDice () {
-        point_ = Random.Range(min_point_+min_point_bonus, max_point_+max_point_bonus);
+        point_ = Random.Range(min_point_+min_point_bonus, max_point_+max_point_bonus+1);
         switch(type_) {
             case DiceType.even:
                 point_ = (point_ % 2 == 0) ? point_: point_ + 1;

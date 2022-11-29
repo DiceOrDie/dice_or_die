@@ -32,6 +32,9 @@ public class InfoPanel : MonoBehaviour
 
     private Image entity_image_;
     private Text entity_name_;
+    private Text[] entity_states_;
+    private Text entity_MaxHP_;
+    private Text entity_BaseAttack_;
 
     void Start()
     {
@@ -42,6 +45,9 @@ public class InfoPanel : MonoBehaviour
 
         entity_image_ = GameObject.Find("InfoPanel/Entity/Title/Icon").GetComponent<Image>();
         entity_name_ = GameObject.Find("InfoPanel/Entity/Title/Name").GetComponent<Text>();
+        entity_states_ = GameObject.Find("InfoPanel/Entity/Info/State").GetComponentsInChildren<Text>();
+        entity_MaxHP_ = GameObject.Find("InfoPanel/Entity/Info/HP/Value").GetComponent<Text>();
+        entity_BaseAttack_ = GameObject.Find("InfoPanel/Entity/Info/Attack/Value").GetComponent<Text>();
         dice_area_.SetActive(false);
         entity_area_.SetActive(false);
     }//Start
@@ -60,6 +66,8 @@ public class InfoPanel : MonoBehaviour
     {
         entity_image_.sprite = entity.entity_info.sprite_;
         entity_name_.text = entity.entity_info.name_;
+        entity_MaxHP_.text = entity.max_HP_.ToString();
+        entity_BaseAttack_.text = entity.base_attack_.ToString();
         dice_area_.SetActive(false);
         entity_area_.SetActive(true);
     }//UpdateEntityInfo

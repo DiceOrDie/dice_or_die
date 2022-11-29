@@ -21,6 +21,8 @@ public class Monster : Entity
     private void Start() {
         EntityInit();
         attack_queue_ = new Queue<MonsterBehavior_SO>();
+        ReloadAttack();
+        base_attack_ = attack_queue_.Peek().damage;
     }
     public void init(string monster_name)
     {

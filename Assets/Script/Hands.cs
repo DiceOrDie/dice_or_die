@@ -98,6 +98,16 @@ public class Hands : MonoBehaviour
         // UpdateUI();
     }//Add
 
+    public void Clear()
+    {
+        foreach(GameObject dice_gameobject in dice_o_list_){
+            Destroy(dice_gameobject);
+        }
+        dice_list_.Clear();
+        dice_o_list_.Clear();
+        print(dice_list_.Count);
+    }
+
     public void OnDiceSelect(Dice dice) {
         dice.SwitchSelected();
     }

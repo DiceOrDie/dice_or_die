@@ -88,7 +88,7 @@ public class Backpack : MonoBehaviour
         //     }//else
         // }//for i
     }//UpdateUI
-    void Refill()
+    public void Refill()
     {
         if (own_dice_gameobject_.Count <= 0)
         {
