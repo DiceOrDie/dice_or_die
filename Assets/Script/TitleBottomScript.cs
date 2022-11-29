@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 public class TitleBottomScript : MonoBehaviour
 {
     public void ContinueBottom()
@@ -14,6 +13,7 @@ public class TitleBottomScript : MonoBehaviour
     }
     public void SettingBottom()
     {
+
     }
     public void ExitBottom()
     {
