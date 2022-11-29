@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Character : Entity
 {
@@ -11,7 +12,8 @@ public class Character : Entity
     private Character_SO character_data_so;
     // [HideInInspector]
     public Character_SO character_info;
-    public AudioSource Skill_audio;
+    public AudioSource skill_audio;
+    public Text skill_text;
     #region Read for CharacterData_SO
     public override int max_HP_
     {
@@ -138,6 +140,11 @@ public class Character : Entity
             this.debuffs_["frozen"]++;
         }
     }
-
+    public IEnumerator UseSkill() {
+        skill_audio.Play();
+        skill_text.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.0f);
+        skill_text.gameObject.SetActive(false);
+    }
     
 }
