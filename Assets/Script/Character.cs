@@ -11,6 +11,7 @@ public class Character : Entity
     private Character_SO character_data_so;
     // [HideInInspector]
     public Character_SO character_info;
+    public AudioSource Skill_audio;
     #region Read for CharacterData_SO
     public override int max_HP_
     {

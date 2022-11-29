@@ -24,11 +24,13 @@ public class Hands : MonoBehaviour
     public Transform itemsParent;
     public bool is_select_on_going;
     public int hands_limit_ = 10;
+    public AudioSource select_audio;
     [SerializeField] GameObject mask_;
     // Image[] slots;
     List<GameObject> dice_o_list_;
     List<Dice> dice_list_;
     List<Dice> selected_dice_;
+
 
     void Start()
     {
@@ -109,6 +111,9 @@ public class Hands : MonoBehaviour
     }
 
     public void OnDiceSelect(Dice dice) {
+        try{
+            select_audio.Play();
+        }catch{}
         dice.SwitchSelected();
     }
 }

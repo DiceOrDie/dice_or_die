@@ -62,6 +62,7 @@ public class Skill_SesamePunch : Skill_base
             last_used = state.round_count;
             int damage = (int)Math.Pow(2, state.roll_result.Count);
             Debug.Log("芝麻拳 : -"+damage.ToString());
+            GameManager.instance.player.Skill_audio.Play();
             GameManager.instance.monsters[0].getDamage(-damage);
             GameManager.instance.player.animator_.SetTrigger("attack");;
             yield return GameManager.instance.monsters[0].ShowDamageText();

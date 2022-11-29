@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
     public GameObject backpack_go_;
     public GameObject hands_go_;
     public GameObject result_bar_;
+    public LevelManagement level_manger_;
     public List<GameObject> monsters_gameobject_;
     public GameObject player_gameobject_;
     public Text state_text_;
@@ -110,7 +111,8 @@ public class GameManager : MonoBehaviour
         backpack_ = backpack_go_.GetComponent<Backpack>();
         hands_ = hands_go_.GetComponent<Hands>();
         player_ = player_gameobject_.GetComponent<Character>();
-        
+        // level_manger_ = result_bar_.GetComponentInChildren<LevelManagement>();
+        level_manger_.NextLevel();
         // foreach(GameObject monster_gameobject in monsters_gameobject_) {
         //     monsters_.Add(monster_gameobject.GetComponent<Monster>());
         // }
@@ -327,6 +329,7 @@ public class GameManager : MonoBehaviour
             print(now_Scene);
             if(now_Scene != 10)
             {
+                level_manger_.NextLevel();
                 SceneManager.LoadScene(now_Scene + 1);
                 state.game_state = GameState.kRoomStart;
             }
