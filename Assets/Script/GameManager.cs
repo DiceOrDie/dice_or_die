@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 [System.Serializable]
 public class State {
@@ -25,7 +26,7 @@ public class State {
         roll_chance = new RollChance();
         List<Dice> roll_result = new List<Dice>();
         bonus_attack_count = 0;
-        game_state = GameState.kRoomStart;
+        game_state = GameState.kGameStart;
         // player = GameManager.instance.player;
         // monsters = GameManager.instance.monsters;
         // backpack =
@@ -43,6 +44,7 @@ public class RoundLog {
 
 }
 public enum GameState {
+    kGameStart,
     kRoomStart, 
     kRoomEnd, 
     kRoundStart, 
@@ -72,7 +74,7 @@ public class GameManager : MonoBehaviour
 
 
     private GameState game_state_;
-    private bool flag_is_room_end_;
+    private bool gameover_flag_;
     private Character player_;
     private Backpack backpack_;
     private Hands hands_;
@@ -100,10 +102,6 @@ public class GameManager : MonoBehaviour
             return;
         }
         instance = this;
-        DontDestroyOnLoad(this);
-        DontDestroyOnLoad(backpack_go_);
-        DontDestroyOnLoad(hands_go_);
-        DontDestroyOnLoad(player_gameobject_);
         // DontDestroyOnLoad(this);
         
     }
@@ -112,18 +110,21 @@ public class GameManager : MonoBehaviour
         backpack_ = backpack_go_.GetComponent<Backpack>();
         hands_ = hands_go_.GetComponent<Hands>();
         player_ = player_gameobject_.GetComponent<Character>();
-        monsters_ = new List<Monster>();
-        foreach(GameObject monster_gameobject in monsters_gameobject_) {
-            monsters_.Add(monster_gameobject.GetComponent<Monster>());
-        }
+        
+        // foreach(GameObject monster_gameobject in monsters_gameobject_) {
+        //     monsters_.Add(monster_gameobject.GetComponent<Monster>());
+        // }
         state = new State();
         StartCoroutine(GameRoutine());
     }
     IEnumerator GameRoutine() {
-        flag_is_room_end_ = false;
-        while (!flag_is_room_end_) {
+        gameover_flag_ = false;
+        while (!gameover_flag_) {
             yield return UpdateStateText();
             switch (state.game_state) {
+            case GameState.kGameStart:
+                yield return GameStart();
+                break;
             case GameState.kRoomStart:
                 yield return RoomStart();
                 break;
@@ -148,23 +149,31 @@ public class GameManager : MonoBehaviour
             case GameState.kRoundEnd:
                 yield return RoundEnd();  
                 break;
+            case GameState.kRoomEnd:
+                yield return RoomEnd();
+                break;
             default:
                 Debug.Log("Error in GameManager/GameRoutine()/switch-case");
                 break;
             }
         }
-        state.game_state = GameState.kRoomEnd;
-        yield return UpdateStateText();
-        Debug.Log("Room End");
-
-        if(player_.IsAlive())
-        {
-            int now_Scene = SceneManager.GetActiveScene().buildIndex;
-            if(now_Scene != 8)
-                SceneManager.LoadScene(now_Scene + 1);
-        }
+        // Game Over
+        SceneManager.LoadScene(0);
+        // yield return UpdateStateText();
+        
     }
-    
+    IEnumerator GameStart() {
+        Debug.Log("GameStart() started.");
+        PlayerGameInitialize();
+        foreach (Skill_base skill in player_.skill_list)
+        {
+            Debug.Log("技能檢測");
+            yield return skill.Effect(state);
+        }
+        Debug.Log("GameStart() finished.");
+        state.game_state = GameState.kRoomStart;
+        yield return null;
+    }
     IEnumerator RoomStart() {
         Debug.Log("RoomStart() started.");
         PlayerRoomInitialize();
@@ -263,7 +272,7 @@ public class GameManager : MonoBehaviour
             }
         }
         Debug.Log("PlayerAttack() finished.");
-        if(isGameEnd())
+        if(isRoomEnd())
             state.game_state = GameState.kRoundEnd;
         state.game_state = GameState.kMonsterAttack;
         yield return new WaitForSeconds(1f);
@@ -280,8 +289,8 @@ public class GameManager : MonoBehaviour
             // yield return new WaitForSeconds(0.5f);
         }
         Debug.Log("MonsterAttack() finished.");
-        if(isGameEnd())
-            state.game_state = GameState.kRoundEnd;
+        if(isRoomEnd())
+            state.game_state = GameState.kRoomEnd;
         state.game_state = GameState.kRoundEnd;
         yield return new WaitForSeconds(1f);
     }
@@ -302,24 +311,46 @@ public class GameManager : MonoBehaviour
         foreach ( Dice dice in rolled_dice_list_) {
             Destroy(dice.gameObject);
         }
-        isGameEnd();
-        Debug.Log("RoundEnd() finished.");
-        // TODO: RoundStart
-        if (!flag_is_room_end_) {
+        if(isRoomEnd())
+            state.game_state = GameState.kRoomEnd;
+        else 
             state.game_state = GameState.kRoundStart;
+        Debug.Log("RoundEnd() finished.");
+        yield return null;
+    }
+    IEnumerator RoomEnd() {
+        Debug.Log("Room End");
+
+        if(player_.IsAlive())
+        {
+            int now_Scene = SceneManager.GetActiveScene().buildIndex;
+            print(now_Scene);
+            if(now_Scene != 10)
+            {
+                SceneManager.LoadScene(now_Scene + 1);
+                state.game_state = GameState.kRoomStart;
+            }
         }
+        else
+            gameover_flag_ = true;
         yield return null;
     }
     
-    void PlayerRoomInitialize() {
+    void PlayerGameInitialize() {
         player_.CharacterInit();
     }
+    void PlayerRoomInitialize() {
+        // hands.Clear();
+    }
     
-    void MonsterRoomInitialize() {}
+    void MonsterRoomInitialize() {
+        monsters_ = GameObject.Find("/Monsters").GetComponentsInChildren<Monster>().ToList();
+    }
     
-    bool isGameEnd() {
+    bool isRoomEnd() {
         if (!player_.IsAlive()) {
-            flag_is_room_end_ = true;
+            gameover_flag_ = true;
+            return true;
         }
         bool all_monster_die = true;
         foreach (Monster monster in monsters_) {
@@ -329,9 +360,9 @@ public class GameManager : MonoBehaviour
             }
         }
         if (all_monster_die) {
-            flag_is_room_end_ = true;
+            return true;
         }
-        return flag_is_room_end_;
+        return false;
     }
 
     IEnumerator UpdateStateText() {

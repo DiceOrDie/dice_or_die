@@ -23,9 +23,9 @@ public class Skill_base {
         action_state = data.action_state;
     }
     public SkillTable name;
-    public int id;
+    [HideInInspector] public int id;
     public int level;
-    public GameState action_state;
+    [HideInInspector] public GameState action_state;
     public virtual bool isValid(State state) { Debug.Log("普通檢測"); return true;}
     public virtual IEnumerator Effect(State state) { isValid(state); yield return null;}
 }
@@ -106,7 +106,7 @@ public class Skill_AddHP : Skill_base
     public Skill_AddHP(Skill_base data) : base(data){
         id = 3;
         name = SkillTable.AddHP;
-        action_state = GameState.kRoomStart;
+        action_state = GameState.kGameStart;
     }
     public override bool isValid(State state)
     {
@@ -130,7 +130,7 @@ public class Skill_AddAttack : Skill_base
     public Skill_AddAttack(Skill_base data) : base(data){
         id = 4;
         name = SkillTable.AddAttack;
-        action_state = GameState.kRoomStart;
+        action_state = GameState.kGameStart;
     }
     public override bool isValid(State state)
     {
@@ -151,7 +151,7 @@ public class Skill_AddAttack : Skill_base
 public class Skill_AddRoundDice : Skill_base
 {
     public Skill_AddRoundDice(Skill_base data) : base(data){
-        id = 4;
+        id = 5;
         name = SkillTable.AddRoundDice;
         action_state = GameState.kPlayerDrawDice;
     }
@@ -186,9 +186,9 @@ public class Skill_AddRoundDice : Skill_base
 public class Skill_AddHandDice : Skill_base
 {
     public Skill_AddHandDice(Skill_base data) : base(data){
-        id = 4;
+        id = 6;
         name = SkillTable.AddHandDice;
-        action_state = GameState.kRoomStart;
+        action_state = GameState.kGameStart;
     }
     public override bool isValid(State state)
     {
@@ -200,7 +200,29 @@ public class Skill_AddHandDice : Skill_base
     {
         if(isValid(state))
         {
-            GameManager.instance.hands.hands_limit_ += 1 + 1 * level;
+            GameManager.instance.hands.hands_limit_ += 1 + (1 << (level-1));
+            yield return null;
+        }
+    }
+}
+
+public class Skill_AddDropFish : Skill_base
+{
+    public Skill_AddDropFish(Skill_base data) : base(data){
+        id = 7;
+        name = SkillTable.AddDropFish;
+        action_state = GameState.kGameStart;
+    }
+    public override bool isValid(State state)
+    {
+        Debug.Log("小魚乾檢測");
+        if(state.game_state != action_state && level > 0) return false;
+        return true;
+    }
+    public override IEnumerator Effect(State state)
+    {
+        if(isValid(state))
+        {
             yield return null;
         }
     }

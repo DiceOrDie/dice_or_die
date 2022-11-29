@@ -55,13 +55,31 @@ public class Character : Entity
             {
                 case SkillTable.SesamePunch: 
                     index = skill_list.FindIndex(x => x.name == skill.name);
-                    // new_skill_list.Add((Skill_SesamePunch)skill_list[index]);
                     new_skill_list.Add(new Skill_SesamePunch(skill_list[index]));
                     break;
                 case SkillTable.AddPoint:
                     index = skill_list.FindIndex(x => x.name == skill.name);
-                    // new_skill_list.Add((Skill_AddPoint)skill_list[index]);
                     new_skill_list.Add(new Skill_AddPoint(skill_list[index]));
+                    break;
+                case SkillTable.AddHP:
+                    index = skill_list.FindIndex(x => x.name == skill.name);
+                    new_skill_list.Add(new Skill_AddHP(skill_list[index]));
+                    break;
+                case SkillTable.AddAttack:
+                    index = skill_list.FindIndex(x => x.name == skill.name);
+                    new_skill_list.Add(new Skill_AddAttack(skill_list[index]));
+                    break;
+                case SkillTable.AddRoundDice:
+                    index = skill_list.FindIndex(x => x.name == skill.name);
+                    new_skill_list.Add(new Skill_AddRoundDice(skill_list[index]));
+                    break;
+                case SkillTable.AddHandDice:
+                    index = skill_list.FindIndex(x => x.name == skill.name);
+                    new_skill_list.Add(new Skill_AddHandDice(skill_list[index]));
+                    break;
+                case SkillTable.AddDropFish:
+                    index = skill_list.FindIndex(x => x.name == skill.name);
+                    new_skill_list.Add(new Skill_AddDropFish(skill_list[index]));
                     break;
                 default:
                     break;
