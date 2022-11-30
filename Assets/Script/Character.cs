@@ -30,11 +30,11 @@ public class Character : Entity
         get { if(character_info) return character_info.base_attack_; else return 0; }
         set { character_info.base_attack_ = value; }
     }
-    // public override Dictionary<string, int> debuffs_
-    // {
-    //     get { if(character_info) return character_info.debuffs_; else return null; }
-    //     set { character_info.debuffs_ = value; }
-    // }
+    public override int fish_nums_
+    {
+        get { if(character_info) return character_info.fish_nums_; else return 0; }
+        set { character_info.fish_nums_ = value; }
+    }
     public List<Skill_base> skill_list
     {
         get { return character_info.skill_list; }
@@ -116,7 +116,9 @@ public class Character : Entity
         animator_.SetTrigger("attack");
         return attack_damage.ToString();
     }
-
+    public void EarnFish(int fish_num) {
+        this.fish_nums_ += fish_num;
+    }
     public void UpdateState()
     {
         if(this.debuffs_["burn"] > 0)

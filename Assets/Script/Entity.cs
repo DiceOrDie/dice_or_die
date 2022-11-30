@@ -40,11 +40,11 @@ public class Entity : MonoBehaviour
         get { if(entity_info) return entity_info.base_attack_; else return 0; }
         set { entity_info.base_attack_ = value; }
     }
-    // public virtual Dictionary<string, int> debuffs_
-    // {
-    //     get { if(entity_info) return entity_info.debuffs_; else return null; }
-    //     set { entity_info.debuffs_ = value; }
-    // }
+    public virtual int fish_nums_
+    {
+        get { if(entity_info) return entity_info.fish_nums_; else return 0; }
+        set { entity_info.base_attack_ = value; }
+    }
     #endregion
     public void EntityInit() {
         entity_info = Instantiate(entity_data_so);
@@ -60,6 +60,9 @@ public class Entity : MonoBehaviour
         float animationLength = animator_.GetCurrentAnimatorStateInfo(0).length - 0.1f;
         yield return new WaitForSecondsRealtime(animationLength);
         Destroy(gameObject);
+    }
+    public int GetFishNum() {
+        return fish_nums_;
     }
     public void PlayHurtSound() {
         hurt_sound_.Play();
