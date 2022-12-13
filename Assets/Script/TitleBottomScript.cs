@@ -4,6 +4,14 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class TitleBottomScript : MonoBehaviour
 {
+    void Start(){
+        foreach (GameObject o in DontDestroy.dont_destroy) {
+            print(o.name);
+            // DontDestroy.dont_destroy.Remove(o);
+            Destroy(o);
+        }
+        DontDestroy.dont_destroy.Clear();
+    }
     public void ContinueBottom()
     {
     }

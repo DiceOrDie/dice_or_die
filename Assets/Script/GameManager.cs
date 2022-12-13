@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
         hands_ = hands_go_.GetComponent<Hands>();
         player_ = player_gameobject_.GetComponent<Character>();
         // level_manger_ = result_bar_.GetComponentInChildren<LevelManagement>();
-        level_manger_.NextLevel();
+        // level_manger_.NextLevel();
         room_tmp_fish_ = 0;
         // foreach(GameObject monster_gameobject in monsters_gameobject_) {
         //     monsters_.Add(monster_gameobject.GetComponent<Monster>());
@@ -175,11 +175,6 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameStart() started.");
         PlayerGameInitialize();
         yield return new WaitUntil(() => SkillUIManager.upgrading == false);
-        foreach (Skill_base skill in player_.skill_list)
-        {
-            Debug.Log("技能檢測");
-            yield return skill.Effect(state);
-        }
         Debug.Log("GameStart() finished.");
         state.game_state = GameState.kRoomStart;
         yield return null;
@@ -210,13 +205,13 @@ public class GameManager : MonoBehaviour
     IEnumerator PlayerDrawDice() {
         // TODO: turn on backpack UI
         Debug.Log("PlayerDrawDice() started.");
-        backpack_.StartDraw();
-        yield return new WaitUntil(() => backpack_.is_draw_on_going_ == false);
         foreach (Skill_base skill in player_.skill_list)
         {
             Debug.Log("技能檢測");
             yield return skill.Effect(state);
         }
+        backpack_.StartDraw();
+        yield return new WaitUntil(() => backpack_.is_draw_on_going_ == false);
         Debug.Log("PlayerDrawDice() finished.");
         state.game_state = GameState.kPlayerSelectDice;
         //yield return null;
@@ -228,6 +223,11 @@ public class GameManager : MonoBehaviour
             Debug.Log("player can't attack");
             state.game_state = GameState.kPlayerRollDice;
             yield return null;
+        }
+        foreach (Skill_base skill in player_.skill_list)
+        {
+            Debug.Log("技能檢測");
+            yield return skill.Effect(state);
         }
         Debug.Log(player_.CanAttack());
         Debug.Log("PlayerSelectDice() started.");
@@ -345,6 +345,11 @@ public class GameManager : MonoBehaviour
         {
             int now_Scene = SceneManager.GetActiveScene().buildIndex;
             print(now_Scene);
+            while(now_Scene <= 6) {
+                level_manger_.NextLevel();
+                SceneManager.LoadScene(now_Scene + 1);
+                now_Scene += 1;
+            } 
             if(now_Scene != 10)
             {
                 level_manger_.NextLevel();

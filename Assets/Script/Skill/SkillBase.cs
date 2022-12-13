@@ -84,7 +84,7 @@ public class Skill_AddPoint : Skill_base
         id = 2;
         type = SkillTable.AddPoint;
         name = "本喵骰子只是沾到髒東西了";
-        action_state = GameState.kRoomStart;
+        action_state = GameState.kPlayerSelectDice;
     }
     public override bool isValid(State state)
     {
@@ -96,18 +96,18 @@ public class Skill_AddPoint : Skill_base
     {
         if(isValid(state))
         {
-            GameManager.instance.backpack.dice_min_bouns = level;
-            GameManager.instance.backpack.dice_max_bouns = level;
-            foreach (GameObject dice_o in GameManager.instance.backpack.own_dice_gameobject_)
-            {
-                Dice dice = dice_o.GetComponent<Dice>();
-                if(dice.type_ == DiceType.normal)
-                {
-                    Debug.Log(dice.name);
-                    dice.min_point_bonus = level;
-                    dice.max_point_bonus = level;
-                } 
-            }
+            // GameManager.instance.backpack.dice_min_bouns = level;
+            // GameManager.instance.backpack.dice_max_bouns = level;
+            // foreach (GameObject dice_o in GameManager.instance.backpack.own_dice_gameobject_)
+            // {
+            //     Dice dice = dice_o.GetComponent<Dice>();
+            //     if(dice.type_ == DiceType.normal)
+            //     {
+            //         Debug.Log(dice.name);
+            //         dice.min_point_bonus = level;
+            //         dice.max_point_bonus = level;
+            //     } 
+            // }
             foreach (GameObject dice_o in GameManager.instance.hands.dice_o_list_)
             {
                 Dice dice = dice_o.GetComponent<Dice>();
@@ -129,7 +129,7 @@ public class Skill_AddHP : Skill_base
         id = 3;
         type = SkillTable.AddHP;
         name = "本喵才不是胖，是忘記剪毛";
-        action_state = GameState.kGameStart;
+        action_state = GameState.kRoomStart;
     }
     public override bool isValid(State state)
     {
@@ -143,8 +143,8 @@ public class Skill_AddHP : Skill_base
         {
             Debug.Log("原本血量: " + GameManager.instance.player.max_HP_.ToString());
             Debug.Log("增加血量: " + (10 + 10 * (1 << (level - 1))).ToString());
-            GameManager.instance.player.max_HP_ += 10 + 10 * (1 << (level - 1));
-            GameManager.instance.player.current_HP_ = GameManager.instance.player.max_HP_;
+            GameManager.instance.player.max_HP_ = 110 + 10 * (1 << (level - 1));
+            GameManager.instance.player.current_HP_ += 10 * (1 << (level - 1));
             yield return null;
         }
     }
@@ -156,7 +156,7 @@ public class Skill_AddAttack : Skill_base
         id = 4;
         type = SkillTable.AddAttack;
         name = "伸出本喵的爪爪";
-        action_state = GameState.kGameStart;
+        action_state = GameState.kRoomStart;
     }
     public override bool isValid(State state)
     {
@@ -195,7 +195,7 @@ public class Skill_AddRoundDice : Skill_base
             GameObject dice1 = GameManager.Instantiate(GameManager.instance.backpack.basic_dice_prefab_, GameManager.instance.backpack.hands_parent_);
             Hands.instance.Add(dice1);
             if(level >= 2){
-                if(UnityEngine.Random.Range(0,1) == 1)
+                if(UnityEngine.Random.Range(0,2) == 1)
                 {
                     GameObject dice2 = GameManager.Instantiate(GameManager.instance.backpack.basic_dice_prefab_, GameManager.instance.backpack.hands_parent_);
                     Hands.instance.Add(dice2);
@@ -216,7 +216,7 @@ public class Skill_AddHandDice : Skill_base
         id = 6;
         type = SkillTable.AddHandDice;
         name = "雖然本喵不是倉鼠";
-        action_state = GameState.kGameStart;
+        action_state = GameState.kPlayerDrawDice;
     }
     public override bool isValid(State state)
     {
@@ -228,7 +228,7 @@ public class Skill_AddHandDice : Skill_base
     {
         if(isValid(state))
         {
-            GameManager.instance.hands.hands_limit_ += 1 + (1 << (level-1));
+            GameManager.instance.hands.hands_limit_ = 10 + 1 + (1 << (level-1));
             yield return null;
         }
     }
@@ -240,7 +240,7 @@ public class Skill_AddDropFish : Skill_base
         id = 7;
         type = SkillTable.AddDropFish;
         name = "快給本喵小魚乾喵";
-        action_state = GameState.kGameStart;
+        action_state = GameState.kRoomStart;
     }
     public override bool isValid(State state)
     {

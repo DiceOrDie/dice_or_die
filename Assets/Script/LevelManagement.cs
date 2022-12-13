@@ -12,7 +12,7 @@ public class LevelManagement : MonoBehaviour
         }
     }
     public void NextLevel() {
-        level_++;
         level_mask[level_-1].SetActive(false);
+        level_++;
     }
 }
