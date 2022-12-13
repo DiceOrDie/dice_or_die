@@ -54,34 +54,34 @@ public class Character : Entity
         List<Skill_base> new_skill_list = new List<Skill_base>();
         foreach (Skill_base skill in skill_list) {
             int index;
-            switch(skill.name)
+            switch(skill.type)
             {
                 case SkillTable.SesamePunch: 
-                    index = skill_list.FindIndex(x => x.name == skill.name);
+                    index = skill_list.FindIndex(x => x.type == skill.type);
                     new_skill_list.Add(new Skill_SesamePunch(skill_list[index]));
                     break;
                 case SkillTable.AddPoint:
-                    index = skill_list.FindIndex(x => x.name == skill.name);
+                    index = skill_list.FindIndex(x => x.type == skill.type);
                     new_skill_list.Add(new Skill_AddPoint(skill_list[index]));
                     break;
                 case SkillTable.AddHP:
-                    index = skill_list.FindIndex(x => x.name == skill.name);
+                    index = skill_list.FindIndex(x => x.type == skill.type);
                     new_skill_list.Add(new Skill_AddHP(skill_list[index]));
                     break;
                 case SkillTable.AddAttack:
-                    index = skill_list.FindIndex(x => x.name == skill.name);
+                    index = skill_list.FindIndex(x => x.type == skill.type);
                     new_skill_list.Add(new Skill_AddAttack(skill_list[index]));
                     break;
                 case SkillTable.AddRoundDice:
-                    index = skill_list.FindIndex(x => x.name == skill.name);
+                    index = skill_list.FindIndex(x => x.type == skill.type);
                     new_skill_list.Add(new Skill_AddRoundDice(skill_list[index]));
                     break;
                 case SkillTable.AddHandDice:
-                    index = skill_list.FindIndex(x => x.name == skill.name);
+                    index = skill_list.FindIndex(x => x.type == skill.type);
                     new_skill_list.Add(new Skill_AddHandDice(skill_list[index]));
                     break;
                 case SkillTable.AddDropFish:
-                    index = skill_list.FindIndex(x => x.name == skill.name);
+                    index = skill_list.FindIndex(x => x.type == skill.type);
                     new_skill_list.Add(new Skill_AddDropFish(skill_list[index]));
                     break;
                 default:
@@ -112,8 +112,8 @@ public class Character : Entity
         // b.GetComponent<Rigidbody2D>().velocity = new Vector2(1, 0);
 
         // monsters[0].current_HP_ -= attack_damage;
-        monsters[0].getDamage(-attack_damage);
-        animator_.SetTrigger("attack");
+        // monsters[0].getDamage(-attack_damage);
+        
         return attack_damage.ToString();
     }
     public void EarnFish(int fish_num) {

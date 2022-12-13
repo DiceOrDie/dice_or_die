@@ -17,33 +17,41 @@ MonoBehaviour:
   max_HP_: 100
   current_HP_: 100
   base_attack_: 4
+  fish_nums_: 0
   character: 0
   skill_list:
-  - name: 0
+  - type: 0
     id: 1
     level: 1
+    name: 0
     action_state: 6
-  - name: 1
+  - type: 1
     id: 2
-    level: 3
+    level: 0
+    name: 1
     action_state: 0
-  - name: 2
+  - type: 2
     id: 2
-    level: 3
+    level: 0
+    name: 2
     action_state: 0
-  - name: 3
+  - type: 3
     id: 2
-    level: 3
+    level: 0
+    name: 3
     action_state: 0
-  - name: 4
+  - type: 4
     id: 2
-    level: 3
+    level: 0
+    name: 4
     action_state: 0
-  - name: 5
+  - type: 5
     id: 2
-    level: 3
+    level: 0
+    name: 5
     action_state: 0
-  - name: 6
+  - type: 6
     id: 2
-    level: 3
+    level: 0
+    name: 6
     action_state: 0

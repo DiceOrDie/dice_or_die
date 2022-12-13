@@ -27,7 +27,7 @@ public class Hands : MonoBehaviour
     public AudioSource select_audio;
     [SerializeField] GameObject mask_;
     // Image[] slots;
-    List<GameObject> dice_o_list_;
+    public List<GameObject> dice_o_list_;
     List<Dice> dice_list_;
     List<Dice> selected_dice_;
 
@@ -57,15 +57,20 @@ public class Hands : MonoBehaviour
 
         Debug.Log("Dice or Die!");
         mask_.SetActive(true);
-        for(int i = 0; i < dice_list_.Count; i++){
-            if(dice_list_[i].selected_)
-            {
-                selected_dice_.Add(dice_list_[i]);
-                // dice_list_[i].gameObject.SetActive(false);
-                dice_list_.RemoveAt(i);
-                i--;
-            }
+        foreach(Dice dice in GameManager.instance.result_bar_.GetComponentsInChildren<Dice>()) {
+            selected_dice_.Add(dice);
+            dice_o_list_.Remove(dice.gameObject);
+            dice_list_.Remove(dice);
         }
+        // for(int i = 0; i < dice_list_.Count; i++){
+        //     if(dice_list_[i].selected_)
+        //     {
+        //         selected_dice_.Add(dice_list_[i]);
+        //         // dice_list_[i].gameObject.SetActive(false);
+        //         dice_list_.RemoveAt(i);
+        //         i--;
+        //     }
+        // }
         is_select_on_going = false;
     }//OnRollButton
 

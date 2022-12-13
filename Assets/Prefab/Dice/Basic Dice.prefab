@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 4969013613926391868}
   - component: {fileID: 9067925521391349716}
   - component: {fileID: 3457873181079484629}
+  - component: {fileID: 8302512310984921198}
   m_Layer: 5
   m_Name: Basic Dice
   m_TagString: Untagged
@@ -230,6 +231,20 @@ MonoBehaviour:
   selected_: 0
   min_point_bonus: 0
   max_point_bonus: 0
+--- !u!114 &8302512310984921198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132150725493196800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d88bfa4b4fcef6b4bb21a6f5c945c066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack_effect: {fileID: 1042409612227747173, guid: 4466d088350217a468fa08a318ce9968, type: 3}
+  duration: 0.4
 --- !u!1 &2817072494794527222
 GameObject:
   m_ObjectHideFlags: 0

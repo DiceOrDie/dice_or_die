@@ -80,17 +80,7 @@ public class Dice : MonoBehaviour
             default:
                 break;
         }
-        gameObject.GetComponent<Image>().enabled = false;
 
-        GameObject roll_result_text = Instantiate(new GameObject(gameObject.name + "_result"), transform);
-       
-        roll_result_text.AddComponent<Text>();
-        roll_result_text.GetComponent<Text>().text = point_.ToString();
-        roll_result_text.transform.parent = gameObject.transform;
-        roll_result_text.transform.position = gameObject.transform.position;
-        roll_result_text.GetComponent<Text>().font = Resources.GetBuiltinResource<Font>("Arial.ttf");
-        roll_result_text.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
-        roll_result_text.GetComponent<Text>().fontSize = 60;
         return point_;
     }
 }

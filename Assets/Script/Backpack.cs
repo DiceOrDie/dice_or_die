@@ -48,7 +48,7 @@ public class Backpack : MonoBehaviour
     //                               new Dice(DiceType.grass), new Dice(DiceType.grass), new Dice(DiceType.grass), new Dice(DiceType.grass), new Dice(DiceType.grass) };
     public GameObject basic_dice_prefab_;
     public List<GameObject> dice_initial_;
-    private List<GameObject> own_dice_gameobject_ = new List<GameObject>();
+    public List<GameObject> own_dice_gameobject_ = new List<GameObject>();
     // private List<Dice> diceAvailable = new List<Dice>();
     DiceSlot[] slots_;
 
@@ -58,6 +58,9 @@ public class Backpack : MonoBehaviour
     public GameObject backpack_gameobject_;
     public int draw_dice_count_ = 1;
     public int draw_basic_dice_count_ = 1;
+
+    public int dice_min_bouns = 0;
+    public int dice_max_bouns = 0;
 
     void Start()
     {
@@ -99,6 +102,11 @@ public class Backpack : MonoBehaviour
             {
                 //Debug.Log(dice);
                 GameObject o = Instantiate(dice_o, items_parent_);
+                Dice dice = o.GetComponent<Dice>();
+                if(dice.type_ == DiceType.normal) {
+                    dice.min_point_bonus = dice_min_bouns;
+                    dice.max_point_bonus = dice_max_bouns;
+                }
                 o.name = "Dice" + i.ToString();
                 own_dice_gameobject_.Add(o);
                 i++;
@@ -140,8 +148,13 @@ public class Backpack : MonoBehaviour
         }
         for (int i = 0; i < draw_basic_dice_count_; i++)
         {
-            GameObject dice = Instantiate(basic_dice_prefab_, hands_parent_);
-            Hands.instance.Add(dice);
+            GameObject dice_o = Instantiate(basic_dice_prefab_, hands_parent_);
+            Dice dice = dice_o.GetComponent<Dice>();
+            if(dice.type_ == DiceType.normal) {
+                dice.min_point_bonus = dice_min_bouns;
+                dice.max_point_bonus = dice_max_bouns;
+            }
+            Hands.instance.Add(dice_o);
         }
 
         // rand = Random.Range(0, diceAvailable.Count);
