@@ -15,6 +15,7 @@ MonoBehaviour:
   sprite_: {fileID: 21300000, guid: e6ba6414e0e752e4197f842c757156ee, type: 3}
   type_: 0
   name_: "\u666E\u901A\u9AB0"
+  description_: "\u4E00\u9846\u666E\u901A\u7684\u516D\u9762\u9AB0"
   min_point_: 1
   max_point_: 6
   point_: -1

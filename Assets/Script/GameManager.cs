@@ -72,6 +72,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> monsters_gameobject_;
     public GameObject player_gameobject_;
     public Text state_text_;
+    public Font font_;
 
     static public GameManager instance;
     static public State state;
@@ -345,11 +346,12 @@ public class GameManager : MonoBehaviour
         {
             int now_Scene = SceneManager.GetActiveScene().buildIndex;
             print(now_Scene);
-            while(now_Scene <= 6) {
-                level_manger_.NextLevel();
-                SceneManager.LoadScene(now_Scene + 1);
-                now_Scene += 1;
-            } 
+            // 跳關
+            // while(now_Scene <= 6) {
+            //     level_manger_.NextLevel();
+            //     SceneManager.LoadScene(now_Scene + 1);
+            //     now_Scene += 1;
+            // } 
             if(now_Scene != 10)
             {
                 level_manger_.NextLevel();
@@ -482,14 +484,16 @@ public class GameManager : MonoBehaviour
         playerIcon.GetComponent<Image>().sprite = GameObject.Find("Player/Sprite").GetComponent<SpriteRenderer>().sprite;
         yield return new WaitForSeconds(0.4f);
         playerIcon.gameObject.GetComponent<Image>().enabled = false;
-        GameObject playerIcon_result_text = Instantiate(new GameObject(playerIcon.gameObject.name + "_result"), playerIcon.transform);
-        playerIcon_result_text.AddComponent<Text>();
-        playerIcon_result_text.GetComponent<Text>().text = player_.base_attack_.ToString();
-        playerIcon_result_text.transform.parent = playerIcon.gameObject.transform;
-        playerIcon_result_text.transform.position = playerIcon.gameObject.transform.position;
-        playerIcon_result_text.GetComponent<Text>().font = Resources.GetBuiltinResource<Font>("Arial.ttf");
-        playerIcon_result_text.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
-        playerIcon_result_text.GetComponent<Text>().fontSize = 60;
+        GameObject playerIcon_result_text_o = Instantiate(new GameObject(playerIcon.gameObject.name + "_result"), playerIcon.transform);
+        Text playerIcon_result_text = playerIcon_result_text_o.AddComponent<Text>();
+        
+        playerIcon_result_text_o.transform.parent = playerIcon.gameObject.transform;
+        playerIcon_result_text_o.transform.position = playerIcon.gameObject.transform.position;
+        playerIcon_result_text.text = player_.base_attack_.ToString();
+        playerIcon_result_text.font = font_;
+        playerIcon_result_text.alignment = TextAnchor.MiddleCenter;
+        playerIcon_result_text.fontSize = 60;
+        playerIcon_result_text.color = Color.gray;
 
         // GameObject attackSumText = GameObject.Find("Attack Sum Text");
         // attackSumText.GetComponent<Text>().enabled = true;
@@ -510,14 +514,30 @@ public class GameManager : MonoBehaviour
             print("Rolling dice:" + dice.type_);
             yield return new WaitForSeconds(0.4f);
             dice.gameObject.GetComponent<Image>().enabled = false;
-            GameObject roll_result_text = Instantiate(new GameObject(dice.gameObject.name + "_result"), dice.transform);
-            roll_result_text.AddComponent<Text>();
-            roll_result_text.GetComponent<Text>().text = dice.point_.ToString();
-            roll_result_text.transform.parent = dice.gameObject.transform;
-            roll_result_text.transform.position = dice.gameObject.transform.position;
-            roll_result_text.GetComponent<Text>().font = Resources.GetBuiltinResource<Font>("Arial.ttf");
-            roll_result_text.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
-            roll_result_text.GetComponent<Text>().fontSize = 60;
+            GameObject roll_result_text_o = Instantiate(new GameObject(dice.gameObject.name + "_result"), dice.transform);
+            Text roll_result_text = roll_result_text_o.AddComponent<Text>();
+            
+            roll_result_text_o.transform.parent = dice.gameObject.transform;
+            roll_result_text_o.transform.position = dice.gameObject.transform.position;
+            roll_result_text.text = dice.point_.ToString();
+            roll_result_text.font = font_;
+            roll_result_text.alignment = TextAnchor.MiddleCenter;
+            roll_result_text.fontSize = 60;
+            switch(dice.type_){
+                case DiceType.odd:
+                    roll_result_text.color = Color.blue;
+                    break;
+                case DiceType.even:
+                    roll_result_text.color = Color.green;
+                    break;
+                case DiceType.cheat:
+                    roll_result_text.color = Color.black;
+                    break;
+                default:
+                    roll_result_text.color = Color.white;
+                    break;
+
+            }
 
             player_.animator_.SetTrigger("attack");
             yield return dice.gameObject.GetComponent<AttackEffect>().showEffect();

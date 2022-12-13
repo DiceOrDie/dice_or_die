@@ -40,6 +40,10 @@ public class Entity : MonoBehaviour
         get { if(entity_info) return entity_info.base_attack_; else return 0; }
         set { entity_info.base_attack_ = value; }
     }
+    public virtual string description_
+    {
+        get { if(entity_info) return entity_info.description_; else return null; }
+    }
     public virtual int fish_nums_
     {
         get { if(entity_info) return entity_info.fish_nums_; else return 0; }

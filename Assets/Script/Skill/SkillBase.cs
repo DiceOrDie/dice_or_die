@@ -114,8 +114,7 @@ public class Skill_AddPoint : Skill_base
                 if(dice.type_ == DiceType.normal)
                 {
                     Debug.Log(dice.name);
-                    dice.min_point_bonus = level;
-                    dice.max_point_bonus = level;
+                    dice.level_ = level+1;
                 } 
             }
             yield return null;
