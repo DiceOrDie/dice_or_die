@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SkillUIManager : MonoBehaviour
 {
     public static bool upgrading = false;
+    public static bool finished = false;
     List<Skill_base> skills = new List<Skill_base>();
     List<Text> skills_name_text = new List<Text>();
     List<Text> skills_level_text = new List<Text>();
@@ -26,6 +27,10 @@ public class SkillUIManager : MonoBehaviour
         }
         // gameObject.SetActive(false);
     }
+    public void Finished() {
+        finished = true;
+    }
+
     public void Upgrade(int index) {
         foreach (Button button in skills_button) {
             button.gameObject.SetActive(false);

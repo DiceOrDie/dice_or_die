@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Demo2/Level 1_1.unity
     guid: b89e98e1cae697444aa840046cb6a096
   - enabled: 1
+    path: Assets/Scenes/Demo2/Rabbit_alter.unity
+    guid: 1fe71eb1aec40c64591f0f3ecbd0e418
+  - enabled: 1
     path: Assets/Scenes/Demo2/Level 1_2.unity
     guid: a61c2abc96e25fb46a0db112fab062b5
   - enabled: 1

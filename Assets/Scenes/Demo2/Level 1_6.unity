@@ -46130,15 +46130,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d971a10b4ab2a40b1a03adedb38901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvas_go_: {fileID: 0}
+  skill_table_go_: {fileID: 0}
   backpack_go_: {fileID: 2068653586}
   hands_go_: {fileID: 1562948594}
   result_bar_: {fileID: 368564656}
+  level_manger_: {fileID: 0}
   monsters_gameobject_:
   - {fileID: 1223835629}
   - {fileID: 2128750165}
   - {fileID: 749816675}
   player_gameobject_: {fileID: 1376435590}
   state_text_: {fileID: 3489870879076127658}
+  font_: {fileID: 0}
 --- !u!4 &261837319
 Transform:
   m_ObjectHideFlags: 0
@@ -46248,6 +46252,37 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3734706040674850209, guid: 30606552cda31574d882bb170c51e701, type: 3}
   m_PrefabInstance: {fileID: 644203306}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &383322000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 383322001}
+  m_Layer: 0
+  m_Name: RoomType
+  m_TagString: Battle
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &383322001
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383322000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -90, y: 2, z: 5.2693615}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &439682774
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48280,11 +48315,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8020502707187688417, guid: 13a0e24ec3946d042a7447ef961e5006, type: 3}
   m_PrefabInstance: {fileID: 1692673344}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1692673346 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6687678009547366598, guid: 13a0e24ec3946d042a7447ef961e5006, type: 3}
-  m_PrefabInstance: {fileID: 1692673344}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1692673347 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5848222996083095407, guid: 13a0e24ec3946d042a7447ef961e5006, type: 3}
@@ -48352,7 +48382,7 @@ MonoBehaviour:
   - {fileID: 1692673349}
   - {fileID: 1692673348}
   - {fileID: 1692673347}
-  - {fileID: 1692673346}
+  - {fileID: 0}
 --- !u!1 &1997215893
 GameObject:
   m_ObjectHideFlags: 0

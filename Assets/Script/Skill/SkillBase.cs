@@ -142,8 +142,8 @@ public class Skill_AddHP : Skill_base
         {
             Debug.Log("原本血量: " + GameManager.instance.player.max_HP_.ToString());
             Debug.Log("增加血量: " + (10 + 10 * (1 << (level - 1))).ToString());
+            GameManager.instance.player.current_HP_ += 110 + 10 * (1 << (level - 1)) - GameManager.instance.player.max_HP_;
             GameManager.instance.player.max_HP_ = 110 + 10 * (1 << (level - 1));
-            GameManager.instance.player.current_HP_ += 10 * (1 << (level - 1));
             yield return null;
         }
     }

@@ -47,7 +47,7 @@ public class Entity : MonoBehaviour
     public virtual int fish_nums_
     {
         get { if(entity_info) return entity_info.fish_nums_; else return 0; }
-        set { entity_info.base_attack_ = value; }
+        set { entity_info.fish_nums_ = value; }
     }
     #endregion
     public void EntityInit() {
@@ -76,6 +76,10 @@ public class Entity : MonoBehaviour
     }
     public int getDamage(int damage) {
         current_HP_ += damage;
+        if (current_HP_ > max_HP_) {
+            damage = damage - (current_HP_ - max_HP_);
+            current_HP_ = max_HP_;
+        }
         damage_text_.text = damage.ToString();
         if(damage <= 0) {
             damage_text_.color = Color.red;
@@ -83,6 +87,7 @@ public class Entity : MonoBehaviour
         else {
             damage_text_.color = Color.green;
         }
+        
         return current_HP_;
     }
     public IEnumerator ShowDamageText() {

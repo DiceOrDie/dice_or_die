@@ -19,7 +19,6 @@ public class State {
     public List<Monster> monsters;
     public Backpack backpack;
     public Hands hands;
-    
     public State()
     {
         dice_chance = new DiceChance();
@@ -56,7 +55,8 @@ public enum GameState {
     kRoundEnd,
     kUpgradeSkill,
     kLosing, 
-    kWinning
+    kWinning,
+    kAlterStart,
 };
 
 
@@ -73,6 +73,7 @@ public class GameManager : MonoBehaviour
     public GameObject player_gameobject_;
     public Text state_text_;
     public Font font_;
+    public Alter alter;
 
     static public GameManager instance;
     static public State state;
@@ -162,6 +163,9 @@ public class GameManager : MonoBehaviour
             case GameState.kRoomEnd:
                 yield return RoomEnd();
                 break;
+            case GameState.kAlterStart:
+                yield return AlterStart();
+                break;
             default:
                 Debug.Log("Error in GameManager/GameRoutine()/switch-case");
                 break;
@@ -183,17 +187,38 @@ public class GameManager : MonoBehaviour
     IEnumerator RoomStart() {
         Debug.Log("RoomStart() started.");
         PlayerRoomInitialize();
-        MonsterRoomInitialize();
         foreach (Skill_base skill in player_.skill_list)
         {
             Debug.Log("技能檢測");
             yield return skill.Effect(state);
         }
-        Debug.Log("RoomStart() finished.");
-        state.game_state = GameState.kRoundStart;
+        if(GameObject.Find("/RoomType").tag == "Battle")
+        {
+            MonsterRoomInitialize();
+            
+            Debug.Log("RoomStart() finished.");
+            state.game_state = GameState.kRoundStart;
+        }
+        else if (GameObject.Find("/RoomType").tag == "Plot")
+        {
+            alter.gameObject.SetActive(true);
+            state.game_state = GameState.kAlterStart;
+        }
         yield return null;
     }
     
+    IEnumerator AlterStart() {
+        Debug.Log("AlterStart() finished.");
+        alter.Init();
+        alter.isFinished = false; 
+
+        yield return new WaitUntil(() => alter.isFinished == true);
+        alter.gameObject.SetActive(false);
+        state.game_state = GameState.kRoomEnd;
+    }
+
+
+
     IEnumerator RoundStart() {
         // TODO
         Debug.Log("RoundStart() started.");
@@ -368,8 +393,9 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator UpgradeSkill() {
         SkillUIManager.upgrading = true;
+        SkillUIManager.finished = false;
         skill_table_go_.GetComponent<SkillUIManager>().Open();
-        yield return new WaitUntil(() => SkillUIManager.upgrading == false);
+        yield return new WaitUntil(() => SkillUIManager.finished == true);
         state.game_state = GameState.kRoomStart;
     }
     
