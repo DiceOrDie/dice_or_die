@@ -384,11 +384,12 @@ public class GameManager : MonoBehaviour
                 state.game_state = GameState.kUpgradeSkill;
             }
             player_.EarnFish(room_tmp_fish_);
+            Debug.Log("關卡獲得小魚乾數量：" + room_tmp_fish_.ToString());
+            Debug.Log("當前身上的小魚乾數量：" + player_.GetFishNum().ToString());
         }
         else
             gameover_flag_ = true;
         room_tmp_fish_ = 0;
-        Debug.Log("當前身上的小魚乾數量：" + player_.GetFishNum().ToString());
         yield return null;
     }
     IEnumerator UpgradeSkill() {
