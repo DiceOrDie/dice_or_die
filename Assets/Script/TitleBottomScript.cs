@@ -17,7 +17,7 @@ public class TitleBottomScript : MonoBehaviour
     }
     public void StartBottom()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void SettingBottom()
     {
