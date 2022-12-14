@@ -17,3 +17,5 @@ MonoBehaviour:
   max_HP_: 15
   current_HP_: 15
   base_attack_: 0
+  description_: "\u6BCF\u500B\u5730\u4E0B\u57CE\u90FD\u8981\u6709\u7684\u8759\u8760\uFF0C\u6BCF\u6B21\u653B\u64CA\u6703\u56DE\u5FA9\u81EA\u5DF11\u9EDE\u8840\u91CF\u3002"
+  fish_nums_: 0
