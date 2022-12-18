@@ -46143,6 +46143,7 @@ MonoBehaviour:
   player_gameobject_: {fileID: 1376435590}
   state_text_: {fileID: 3489870879076127658}
   font_: {fileID: 0}
+  alter: {fileID: 0}
 --- !u!4 &261837319
 Transform:
   m_ObjectHideFlags: 0
@@ -46290,9 +46291,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 600081920}
     m_Modifications:
+    - target: {fileID: 1048675921497175765, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
+      propertyPath: entity_data_so
+      value: 
+      objectReference: {fileID: 11400000, guid: f22453daef0417d448f428e8790c010d, type: 2}
+    - target: {fileID: 1048675921497175765, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
+      propertyPath: monsterBehavior_
+      value: 
+      objectReference: {fileID: 11400000, guid: 27bdef0aab2e74d4c8fce5b21b517e96, type: 2}
     - target: {fileID: 5082878245077077952, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
       propertyPath: m_Name
-      value: Purple Slime
+      value: Purple Armed Slime
       objectReference: {fileID: 0}
     - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
       propertyPath: m_RootOrder
@@ -47403,14 +47412,14 @@ PrefabInstance:
     - target: {fileID: 1048675921497175765, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
       propertyPath: entity_data_so
       value: 
-      objectReference: {fileID: 11400000, guid: f22453daef0417d448f428e8790c010d, type: 2}
+      objectReference: {fileID: 11400000, guid: 2b49d6e581fab974281c6d6d19a8b66a, type: 2}
     - target: {fileID: 1048675921497175765, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
       propertyPath: monsterBehavior_
       value: 
-      objectReference: {fileID: 11400000, guid: 27bdef0aab2e74d4c8fce5b21b517e96, type: 2}
+      objectReference: {fileID: 11400000, guid: 94f857b51632c074a9f5f5910b4e3ed5, type: 2}
     - target: {fileID: 5082878245077077952, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
       propertyPath: m_Name
-      value: Purple Armed Slime
+      value: Purple Hound
       objectReference: {fileID: 0}
     - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
       propertyPath: m_RootOrder

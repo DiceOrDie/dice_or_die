@@ -46214,6 +46214,7 @@ MonoBehaviour:
   player_gameobject_: {fileID: 1376435590}
   state_text_: {fileID: 3489870879076127658}
   font_: {fileID: 0}
+  alter: {fileID: 0}
 --- !u!4 &261837319
 Transform:
   m_ObjectHideFlags: 0
@@ -46333,14 +46334,14 @@ PrefabInstance:
     - target: {fileID: 1048675921497175765, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
       propertyPath: entity_data_so
       value: 
-      objectReference: {fileID: 11400000, guid: 8f0f1d33b0e61c74790f8012f010f440, type: 2}
+      objectReference: {fileID: 11400000, guid: f22453daef0417d448f428e8790c010d, type: 2}
     - target: {fileID: 1048675921497175765, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
       propertyPath: monsterBehavior_
       value: 
-      objectReference: {fileID: 11400000, guid: 6e5f3058d60ba684e9d95efd88ad08a0, type: 2}
+      objectReference: {fileID: 11400000, guid: 27bdef0aab2e74d4c8fce5b21b517e96, type: 2}
     - target: {fileID: 5082878245077077952, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
       propertyPath: m_Name
-      value: Purple Bat
+      value: Purple Armed Slime
       objectReference: {fileID: 0}
     - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
       propertyPath: m_RootOrder
@@ -47562,14 +47563,14 @@ PrefabInstance:
     - target: {fileID: 1048675921497175765, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
       propertyPath: entity_data_so
       value: 
-      objectReference: {fileID: 11400000, guid: c6719698fd22af345875cd078ac4f75c, type: 2}
+      objectReference: {fileID: 11400000, guid: a99cc49c4a9357f4b91bc88d3e40a2d8, type: 2}
     - target: {fileID: 1048675921497175765, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
       propertyPath: monsterBehavior_
       value: 
-      objectReference: {fileID: 11400000, guid: a072b5197c52b344584b642c26fbc61d, type: 2}
+      objectReference: {fileID: 11400000, guid: b321ef7541de9f9489c9285e3a69bd75, type: 2}
     - target: {fileID: 5082878245077077952, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
       propertyPath: m_Name
-      value: Purple Slime
+      value: Purple Skull
       objectReference: {fileID: 0}
     - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
       propertyPath: m_RootOrder

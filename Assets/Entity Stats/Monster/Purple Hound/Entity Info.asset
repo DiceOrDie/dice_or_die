@@ -18,4 +18,4 @@ MonoBehaviour:
   current_HP_: 12
   base_attack_: 0
   description_: "\u8C93\u8C93\u7279\u5225\u61FC\u6015\u7684\u751F\u7269\uFF0C\u653B\u64CA\u529B\u8F03\u9AD8\u3002"
-  fish_nums_: 0
+  fish_nums_: 4
