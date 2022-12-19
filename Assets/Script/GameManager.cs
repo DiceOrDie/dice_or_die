@@ -383,6 +383,10 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene(now_Scene + 1);
                 state.game_state = GameState.kUpgradeSkill;
             }
+            else if(now_Scene == 10)
+            {
+                SceneManager.LoadScene(now_Scene + 1);
+            }
             player_.EarnFish(room_tmp_fish_);
             Debug.Log("關卡獲得小魚乾數量：" + room_tmp_fish_.ToString());
             Debug.Log("當前身上的小魚乾數量：" + player_.GetFishNum().ToString());
