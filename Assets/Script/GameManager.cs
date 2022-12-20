@@ -377,13 +377,13 @@ public class GameManager : MonoBehaviour
             //     SceneManager.LoadScene(now_Scene + 1);
             //     now_Scene += 1;
             // } 
-            if(now_Scene != 10)
+            if(now_Scene != 11)
             {
                 level_manger_.NextLevel();
                 SceneManager.LoadScene(now_Scene + 1);
                 state.game_state = GameState.kUpgradeSkill;
             }
-            else if(now_Scene == 10)
+            else if(now_Scene == 11)
             {
                 GameObject.Find("Background Music").GetComponent<AudioSource>().Stop();
                 SceneManager.LoadScene(now_Scene + 1);
