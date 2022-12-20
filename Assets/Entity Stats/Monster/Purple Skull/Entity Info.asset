@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8247f479941afbc4db5adcc3d6c75002, type: 3}
   m_Name: Entity Info
   m_EditorClassIdentifier: 
+  sprite_: {fileID: 1855342467, guid: 55dcb74b063fad4448db79c4b8a5df7e, type: 3}
+  name_: "\u6BDB\u7DDA\u9AB7\u9ACF\u982D"
   max_HP_: 25
   current_HP_: 25
   base_attack_: 0
+  description_: "\u64C1\u6709\u4F7F\u7576\u6B21\u653B\u64CA\u50B7\u5BB3\u5169\u500D\u7684\u5492\u8A9E\uFF0C\u4F46\u662F\u6BCF\u5169\u56DE\u5408\u53EA\u6703\u4F7F\u7528\u4E00\u6B21\u3002"
+  fish_nums_: 5

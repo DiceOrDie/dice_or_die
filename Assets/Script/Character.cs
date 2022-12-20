@@ -30,11 +30,11 @@ public class Character : Entity
         get { if(character_info) return character_info.base_attack_; else return 0; }
         set { character_info.base_attack_ = value; }
     }
-    // public override Dictionary<string, int> debuffs_
-    // {
-    //     get { if(character_info) return character_info.debuffs_; else return null; }
-    //     set { character_info.debuffs_ = value; }
-    // }
+    public override int fish_nums_
+    {
+        get { if(character_info) return character_info.fish_nums_; else return 0; }
+        set { character_info.fish_nums_ = value; }
+    }
     public List<Skill_base> skill_list
     {
         get { return character_info.skill_list; }
@@ -54,34 +54,34 @@ public class Character : Entity
         List<Skill_base> new_skill_list = new List<Skill_base>();
         foreach (Skill_base skill in skill_list) {
             int index;
-            switch(skill.name)
+            switch(skill.type)
             {
                 case SkillTable.SesamePunch: 
-                    index = skill_list.FindIndex(x => x.name == skill.name);
+                    index = skill_list.FindIndex(x => x.type == skill.type);
                     new_skill_list.Add(new Skill_SesamePunch(skill_list[index]));
                     break;
                 case SkillTable.AddPoint:
-                    index = skill_list.FindIndex(x => x.name == skill.name);
+                    index = skill_list.FindIndex(x => x.type == skill.type);
                     new_skill_list.Add(new Skill_AddPoint(skill_list[index]));
                     break;
                 case SkillTable.AddHP:
-                    index = skill_list.FindIndex(x => x.name == skill.name);
+                    index = skill_list.FindIndex(x => x.type == skill.type);
                     new_skill_list.Add(new Skill_AddHP(skill_list[index]));
                     break;
                 case SkillTable.AddAttack:
-                    index = skill_list.FindIndex(x => x.name == skill.name);
+                    index = skill_list.FindIndex(x => x.type == skill.type);
                     new_skill_list.Add(new Skill_AddAttack(skill_list[index]));
                     break;
                 case SkillTable.AddRoundDice:
-                    index = skill_list.FindIndex(x => x.name == skill.name);
+                    index = skill_list.FindIndex(x => x.type == skill.type);
                     new_skill_list.Add(new Skill_AddRoundDice(skill_list[index]));
                     break;
                 case SkillTable.AddHandDice:
-                    index = skill_list.FindIndex(x => x.name == skill.name);
+                    index = skill_list.FindIndex(x => x.type == skill.type);
                     new_skill_list.Add(new Skill_AddHandDice(skill_list[index]));
                     break;
                 case SkillTable.AddDropFish:
-                    index = skill_list.FindIndex(x => x.name == skill.name);
+                    index = skill_list.FindIndex(x => x.type == skill.type);
                     new_skill_list.Add(new Skill_AddDropFish(skill_list[index]));
                     break;
                 default:
@@ -112,11 +112,13 @@ public class Character : Entity
         // b.GetComponent<Rigidbody2D>().velocity = new Vector2(1, 0);
 
         // monsters[0].current_HP_ -= attack_damage;
-        monsters[0].getDamage(-attack_damage);
-        animator_.SetTrigger("attack");
+        // monsters[0].getDamage(-attack_damage);
+        
         return attack_damage.ToString();
     }
-
+    public void EarnFish(int fish_num) {
+        this.fish_nums_ += fish_num;
+    }
     public void UpdateState()
     {
         if(this.debuffs_["burn"] > 0)

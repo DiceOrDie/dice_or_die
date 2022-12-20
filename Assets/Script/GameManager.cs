@@ -19,7 +19,6 @@ public class State {
     public List<Monster> monsters;
     public Backpack backpack;
     public Hands hands;
-    
     public State()
     {
         dice_chance = new DiceChance();
@@ -53,15 +52,19 @@ public enum GameState {
     kPlayerRollDice, 
     kPlayerAttack, 
     kMonsterAttack, 
-    kRoundEnd, 
+    kRoundEnd,
+    kUpgradeSkill,
     kLosing, 
-    kWinning
+    kWinning,
+    kAlterStart,
 };
 
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
+    public GameObject canvas_go_;
+    public GameObject skill_table_go_;
     public GameObject backpack_go_;
     public GameObject hands_go_;
     public GameObject result_bar_;
@@ -69,6 +72,8 @@ public class GameManager : MonoBehaviour
     public List<GameObject> monsters_gameobject_;
     public GameObject player_gameobject_;
     public Text state_text_;
+    public Font font_;
+    public Alter alter;
 
     static public GameManager instance;
     static public State state;
@@ -79,7 +84,7 @@ public class GameManager : MonoBehaviour
     private Character player_;
     private Backpack backpack_;
     private Hands hands_;
-
+    private int room_tmp_fish_;
     public Character player{
         get { return player_; }
     }
@@ -112,7 +117,8 @@ public class GameManager : MonoBehaviour
         hands_ = hands_go_.GetComponent<Hands>();
         player_ = player_gameobject_.GetComponent<Character>();
         // level_manger_ = result_bar_.GetComponentInChildren<LevelManagement>();
-        level_manger_.NextLevel();
+        // level_manger_.NextLevel();
+        room_tmp_fish_ = 0;
         // foreach(GameObject monster_gameobject in monsters_gameobject_) {
         //     monsters_.Add(monster_gameobject.GetComponent<Monster>());
         // }
@@ -151,8 +157,14 @@ public class GameManager : MonoBehaviour
             case GameState.kRoundEnd:
                 yield return RoundEnd();  
                 break;
+            case GameState.kUpgradeSkill:
+                yield return UpgradeSkill();
+                break;
             case GameState.kRoomEnd:
                 yield return RoomEnd();
+                break;
+            case GameState.kAlterStart:
+                yield return AlterStart();
                 break;
             default:
                 Debug.Log("Error in GameManager/GameRoutine()/switch-case");
@@ -167,11 +179,7 @@ public class GameManager : MonoBehaviour
     IEnumerator GameStart() {
         Debug.Log("GameStart() started.");
         PlayerGameInitialize();
-        foreach (Skill_base skill in player_.skill_list)
-        {
-            Debug.Log("技能檢測");
-            yield return skill.Effect(state);
-        }
+        yield return new WaitUntil(() => SkillUIManager.upgrading == false);
         Debug.Log("GameStart() finished.");
         state.game_state = GameState.kRoomStart;
         yield return null;
@@ -179,17 +187,38 @@ public class GameManager : MonoBehaviour
     IEnumerator RoomStart() {
         Debug.Log("RoomStart() started.");
         PlayerRoomInitialize();
-        MonsterRoomInitialize();
         foreach (Skill_base skill in player_.skill_list)
         {
             Debug.Log("技能檢測");
             yield return skill.Effect(state);
         }
-        Debug.Log("RoomStart() finished.");
-        state.game_state = GameState.kRoundStart;
+        if(GameObject.Find("/RoomType").tag == "Battle")
+        {
+            MonsterRoomInitialize();
+            
+            Debug.Log("RoomStart() finished.");
+            state.game_state = GameState.kRoundStart;
+        }
+        else if (GameObject.Find("/RoomType").tag == "Plot")
+        {
+            alter.gameObject.SetActive(true);
+            state.game_state = GameState.kAlterStart;
+        }
         yield return null;
     }
     
+    IEnumerator AlterStart() {
+        Debug.Log("AlterStart() finished.");
+        alter.Init();
+        alter.isFinished = false; 
+
+        yield return new WaitUntil(() => alter.isFinished == true);
+        alter.gameObject.SetActive(false);
+        state.game_state = GameState.kRoomEnd;
+    }
+
+
+
     IEnumerator RoundStart() {
         // TODO
         Debug.Log("RoundStart() started.");
@@ -202,13 +231,13 @@ public class GameManager : MonoBehaviour
     IEnumerator PlayerDrawDice() {
         // TODO: turn on backpack UI
         Debug.Log("PlayerDrawDice() started.");
-        backpack_.StartDraw();
-        yield return new WaitUntil(() => backpack_.is_draw_on_going_ == false);
         foreach (Skill_base skill in player_.skill_list)
         {
             Debug.Log("技能檢測");
             yield return skill.Effect(state);
         }
+        backpack_.StartDraw();
+        yield return new WaitUntil(() => backpack_.is_draw_on_going_ == false);
         Debug.Log("PlayerDrawDice() finished.");
         state.game_state = GameState.kPlayerSelectDice;
         //yield return null;
@@ -220,6 +249,11 @@ public class GameManager : MonoBehaviour
             Debug.Log("player can't attack");
             state.game_state = GameState.kPlayerRollDice;
             yield return null;
+        }
+        foreach (Skill_base skill in player_.skill_list)
+        {
+            Debug.Log("技能檢測");
+            yield return skill.Effect(state);
         }
         Debug.Log(player_.CanAttack());
         Debug.Log("PlayerSelectDice() started.");
@@ -259,11 +293,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("Attack: " + attack_damage);
 
         // yield return new WaitForSeconds(2);
-        DisplayAttackSummation(attack_damage);
+        yield return DisplayAttackSummation(attack_damage, rolled_dice_list_);
         // yield return new WaitForSeconds(2);
 
-        if(!attack_damage.Equals("0"))
-            yield return monsters_[0].ShowDamageText();
+        // if(!attack_damage.Equals("0"))
+        //     yield return monsters_[0].ShowDamageText();
         
         foreach (Skill_base skill in player_.skill_list)
         {
@@ -274,6 +308,7 @@ public class GameManager : MonoBehaviour
         for(int i = 0; i < monsters_.Count; i++) {
             Monster monster = monsters_[i];
             if (!monster.IsAlive()) {
+                room_tmp_fish_ += monster.GetFishNum();
                 monsters_.Remove(monster);
                 yield return monster.Die();
                 // Destroy(monster.gameObject);
@@ -311,6 +346,7 @@ public class GameManager : MonoBehaviour
             Monster monster = monsters_[i];
             monster.UpdateState();
             if (!monster.IsAlive()) {
+                room_tmp_fish_ += monster.GetFishNum();
                 monsters_.Remove(monster);
                 monster.Die();
                 // Destroy(monster.gameObject);
@@ -335,20 +371,45 @@ public class GameManager : MonoBehaviour
         {
             int now_Scene = SceneManager.GetActiveScene().buildIndex;
             print(now_Scene);
-            if(now_Scene != 10)
+            // 跳關
+            // while(now_Scene <= 6) {
+            //     level_manger_.NextLevel();
+            //     SceneManager.LoadScene(now_Scene + 1);
+            //     now_Scene += 1;
+            // } 
+            if(now_Scene != 11)
             {
                 level_manger_.NextLevel();
                 SceneManager.LoadScene(now_Scene + 1);
-                state.game_state = GameState.kRoomStart;
+                state.game_state = GameState.kUpgradeSkill;
             }
+            else if(now_Scene == 11)
+            {
+                GameObject.Find("Background Music").GetComponent<AudioSource>().Stop();
+                SceneManager.LoadScene(now_Scene + 1);
+            }
+            player_.EarnFish(room_tmp_fish_);
+            Debug.Log("關卡獲得小魚乾數量：" + room_tmp_fish_.ToString());
+            Debug.Log("當前身上的小魚乾數量：" + player_.GetFishNum().ToString());
         }
         else
             gameover_flag_ = true;
+        room_tmp_fish_ = 0;
         yield return null;
+    }
+    IEnumerator UpgradeSkill() {
+        SkillUIManager.upgrading = true;
+        SkillUIManager.finished = false;
+        skill_table_go_.GetComponent<SkillUIManager>().Open();
+        yield return new WaitUntil(() => SkillUIManager.finished == true);
+        state.game_state = GameState.kRoomStart;
     }
     
     void PlayerGameInitialize() {
         player_.CharacterInit();
+        skill_table_go_.GetComponent<SkillUIManager>().Init();
+        SkillUIManager.upgrading = true;
+        skill_table_go_.GetComponent<SkillUIManager>().Open();
     }
     void PlayerRoomInitialize() {
         // hands.Clear();
@@ -427,11 +488,12 @@ public class GameManager : MonoBehaviour
             // state_text_.gameObject.SetActive(false);
             break;
         case GameState.kRoomEnd:
-            if(!player_.IsAlive())
+            if(!player_.IsAlive()){
                 state_text_.text = "You Died.";
-            state_text_.gameObject.SetActive(true);
-            yield return new WaitForSeconds(2f);
-            state_text_.gameObject.SetActive(false);
+                state_text_.gameObject.SetActive(true);
+                yield return new WaitForSeconds(2f);
+                state_text_.gameObject.SetActive(false);
+            }
             break;
         }
 
@@ -444,7 +506,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    void DisplayAttackSummation(string attack_damage) {
+    IEnumerator DisplayAttackSummation(string attack_damage, List<Dice> rolled_dice_list_) {
         // foreach (Dice dice in rolled_dice_list_) {
         //     dice.gameObject.SetActive(false);
         // }
@@ -452,22 +514,75 @@ public class GameManager : MonoBehaviour
         GameObject playerIcon = GameObject.Find("Player Icon");
         playerIcon.GetComponent<Image>().enabled = true;
         playerIcon.GetComponent<Image>().sprite = GameObject.Find("Player/Sprite").GetComponent<SpriteRenderer>().sprite;
+        yield return new WaitForSeconds(0.4f);
+        playerIcon.gameObject.GetComponent<Image>().enabled = false;
+        GameObject playerIcon_result_text_o = Instantiate(new GameObject(playerIcon.gameObject.name + "_result"), playerIcon.transform);
+        Text playerIcon_result_text = playerIcon_result_text_o.AddComponent<Text>();
+        
+        playerIcon_result_text_o.transform.parent = playerIcon.gameObject.transform;
+        playerIcon_result_text_o.transform.position = playerIcon.gameObject.transform.position;
+        playerIcon_result_text.text = player_.base_attack_.ToString();
+        playerIcon_result_text.font = font_;
+        playerIcon_result_text.alignment = TextAnchor.MiddleCenter;
+        playerIcon_result_text.fontSize = 60;
+        playerIcon_result_text.color = Color.gray;
 
-        GameObject attackSumText = GameObject.Find("Attack Sum Text");
-        attackSumText.GetComponent<Text>().enabled = true;
-        attackSumText.GetComponent<Text>().text = "= " + attack_damage;
-        Debug.Log(attackSumText.GetComponent<Text>().text);
-        attackSumText.GetComponent<Text>().font = Resources.GetBuiltinResource<Font>("Arial.ttf");
-        attackSumText.GetComponent<Text>().horizontalOverflow = HorizontalWrapMode.Overflow;
-        attackSumText.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
-        attackSumText.GetComponent<Text>().fontSize = 60;
-        attackSumText.transform.SetSiblingIndex(rolled_dice_list_.Count + 1);
+        // GameObject attackSumText = GameObject.Find("Attack Sum Text");
+        // attackSumText.GetComponent<Text>().enabled = true;
+        // attackSumText.GetComponent<Text>().text = "= " + attack_damage;
+        // Debug.Log(attackSumText.GetComponent<Text>().text);
+        // attackSumText.GetComponent<Text>().font = Resources.GetBuiltinResource<Font>("Arial.ttf");
+        // attackSumText.GetComponent<Text>().horizontalOverflow = HorizontalWrapMode.Overflow;
+        // attackSumText.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
+        // attackSumText.GetComponent<Text>().fontSize = 60;
+        // attackSumText.transform.SetSiblingIndex(rolled_dice_list_.Count + 1);
+        player_.animator_.SetTrigger("attack");
+        yield return playerIcon.GetComponent<AttackEffect>().showEffect();
+        monsters[0].getDamage(-player_.base_attack_);
+        StartCoroutine(monsters_[0].ShowDamageText());
 
-        return;
+        // rolled_dice_list_.Reverse();
+        foreach(Dice dice in rolled_dice_list_) {
+            print("Rolling dice:" + dice.type_);
+            yield return new WaitForSeconds(0.4f);
+            dice.gameObject.GetComponent<Image>().enabled = false;
+            GameObject roll_result_text_o = Instantiate(new GameObject(dice.gameObject.name + "_result"), dice.transform);
+            Text roll_result_text = roll_result_text_o.AddComponent<Text>();
+            
+            roll_result_text_o.transform.parent = dice.gameObject.transform;
+            roll_result_text_o.transform.position = dice.gameObject.transform.position;
+            roll_result_text.text = dice.point_.ToString();
+            roll_result_text.font = font_;
+            roll_result_text.alignment = TextAnchor.MiddleCenter;
+            roll_result_text.fontSize = 60;
+            switch(dice.type_){
+                case DiceType.odd:
+                    roll_result_text.color = Color.blue;
+                    break;
+                case DiceType.even:
+                    roll_result_text.color = Color.green;
+                    break;
+                case DiceType.cheat:
+                    roll_result_text.color = Color.black;
+                    break;
+                default:
+                    roll_result_text.color = Color.white;
+                    break;
+
+            }
+
+            player_.animator_.SetTrigger("attack");
+            yield return dice.gameObject.GetComponent<AttackEffect>().showEffect();
+            monsters[0].getDamage(-dice.point_);
+            StartCoroutine(monsters_[0].ShowDamageText());
+
+        }
+        yield return new WaitForSeconds(0.4f);
     }
 
     void CleanRollResult() {
         GameObject.Find("Player Icon").GetComponent<Image>().enabled = false;
-        GameObject.Find("Attack Sum Text").GetComponent<Text>().enabled = false;
+        Destroy(GameObject.Find("Player Icon/Player Icon_result(Clone)"));
+        // GameObject.Find("Attack Sum Text").GetComponent<Text>().enabled = false;
     }
 }

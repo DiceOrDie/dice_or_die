@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4969013613926391868}
   - component: {fileID: 9067925521391349716}
   - component: {fileID: 3457873181079484629}
+  - component: {fileID: 3844417345455772540}
   m_Layer: 5
   m_Name: Odd Dice
   m_TagString: Untagged
@@ -123,13 +124,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6666301694126842649, guid: c7151baa5817c10478213ca4e80684f0, type: 3}
-        m_TargetAssemblyTypeName: Hands, Assembly-CSharp
-        m_MethodName: OnDiceSelect
-        m_Mode: 2
+      - m_Target: {fileID: 3457873181079484629}
+        m_TargetAssemblyTypeName: Dice, Assembly-CSharp
+        m_MethodName: SwitchSelected
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 3457873181079484629}
-          m_ObjectArgumentAssemblyTypeName: Dice, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -150,6 +151,21 @@ MonoBehaviour:
   dice_so_: {fileID: 11400000, guid: 1d498bb0a09a32e48bffd2a67e86acbd, type: 2}
   selected_pannel_: {fileID: 1464750872851735183}
   selected_: 0
+  level_: 1
+--- !u!114 &3844417345455772540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2132150725493196800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d88bfa4b4fcef6b4bb21a6f5c945c066, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attack_effect: {fileID: 1042409612227747173, guid: 4466d088350217a468fa08a318ce9968, type: 3}
+  duration: 0.4
 --- !u!1 &2817072494794527222
 GameObject:
   m_ObjectHideFlags: 0

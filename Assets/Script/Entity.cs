@@ -40,11 +40,15 @@ public class Entity : MonoBehaviour
         get { if(entity_info) return entity_info.base_attack_; else return 0; }
         set { entity_info.base_attack_ = value; }
     }
-    // public virtual Dictionary<string, int> debuffs_
-    // {
-    //     get { if(entity_info) return entity_info.debuffs_; else return null; }
-    //     set { entity_info.debuffs_ = value; }
-    // }
+    public virtual string description_
+    {
+        get { if(entity_info) return entity_info.description_; else return null; }
+    }
+    public virtual int fish_nums_
+    {
+        get { if(entity_info) return entity_info.fish_nums_; else return 0; }
+        set { entity_info.fish_nums_ = value; }
+    }
     #endregion
     public void EntityInit() {
         entity_info = Instantiate(entity_data_so);
@@ -61,6 +65,9 @@ public class Entity : MonoBehaviour
         yield return new WaitForSecondsRealtime(animationLength);
         Destroy(gameObject);
     }
+    public int GetFishNum() {
+        return fish_nums_;
+    }
     public void PlayHurtSound() {
         hurt_sound_.Play();
     }
@@ -69,6 +76,10 @@ public class Entity : MonoBehaviour
     }
     public int getDamage(int damage) {
         current_HP_ += damage;
+        if (current_HP_ > max_HP_) {
+            damage = damage - (current_HP_ - max_HP_);
+            current_HP_ = max_HP_;
+        }
         damage_text_.text = damage.ToString();
         if(damage <= 0) {
             damage_text_.color = Color.red;
@@ -76,6 +87,7 @@ public class Entity : MonoBehaviour
         else {
             damage_text_.color = Color.green;
         }
+        
         return current_HP_;
     }
     public IEnumerator ShowDamageText() {

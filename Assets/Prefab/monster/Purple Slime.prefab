@@ -57,6 +57,7 @@ MonoBehaviour:
   animator_: {fileID: 5402633413976299931}
   hurt_sound_: {fileID: 3275900441723703354}
   die_sound_: {fileID: 3773888041485615154}
+  entity_info: {fileID: 0}
   monsterBehavior_: {fileID: 11400000, guid: a072b5197c52b344584b642c26fbc61d, type: 2}
 --- !u!95 &5402633413976299931
 Animator:
@@ -296,6 +297,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3232419452143267116}
     m_Modifications:
+    - target: {fileID: 27677612697843282, guid: c84a4a36fd3d93b4b9128a4204a5f28a, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 86733b772afa8e44c86dc134c4f69fa2, type: 3}
+    - target: {fileID: 2658515471935936726, guid: c84a4a36fd3d93b4b9128a4204a5f28a, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 86733b772afa8e44c86dc134c4f69fa2, type: 3}
+    - target: {fileID: 6415997304461192664, guid: c84a4a36fd3d93b4b9128a4204a5f28a, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 86733b772afa8e44c86dc134c4f69fa2, type: 3}
     - target: {fileID: 6890544517681316958, guid: c84a4a36fd3d93b4b9128a4204a5f28a, type: 3}
       propertyPath: m_Name
       value: HP
@@ -344,6 +357,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8767678126786567517, guid: c84a4a36fd3d93b4b9128a4204a5f28a, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 86733b772afa8e44c86dc134c4f69fa2, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c84a4a36fd3d93b4b9128a4204a5f28a, type: 3}
 --- !u!114 &1677405757689828598 stripped

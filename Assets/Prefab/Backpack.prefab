@@ -380,10 +380,13 @@ MonoBehaviour:
   - {fileID: 2132150725493196800, guid: 7fb495fc9ba5168498c886ae740b370e, type: 3}
   - {fileID: 2132150725493196800, guid: 7fb495fc9ba5168498c886ae740b370e, type: 3}
   - {fileID: 2132150725493196800, guid: 7fb495fc9ba5168498c886ae740b370e, type: 3}
+  own_dice_gameobject_: []
   is_draw_on_going_: 0
   backpack_gameobject_: {fileID: 5862525294446202759}
   draw_dice_count_: 1
   draw_basic_dice_count_: 1
+  dice_min_bouns: 0
+  dice_max_bouns: 0
 --- !u!95 &2068653589
 Animator:
   serializedVersion: 4

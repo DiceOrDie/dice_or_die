@@ -275,7 +275,8 @@ MonoBehaviour:
   entity_info: {fileID: 0}
   character_data_so: {fileID: 11400000, guid: 2af7921625089cc45aa93539b043ef75, type: 2}
   character_info: {fileID: 11400000, guid: 2af7921625089cc45aa93539b043ef75, type: 2}
-  Skill_audio: {fileID: 2099288043915019219}
+  skill_audio: {fileID: 2099288043915019219}
+  skill_text: {fileID: 6460500045727963141}
 --- !u!95 &8819870765420067150
 Animator:
   serializedVersion: 4
@@ -351,7 +352,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8590801905560688488
 RectTransform:
   m_ObjectHideFlags: 0
