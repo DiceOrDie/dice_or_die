@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8247f479941afbc4db5adcc3d6c75002, type: 3}
   m_Name: Entity Info
   m_EditorClassIdentifier: 
-  sprite_: {fileID: 290362170, guid: 5668ee85aa1e08848b6a6a942e005f4a, type: 3}
+  sprite_: {fileID: -2119937862, guid: 5ca978c74e2fab144aa42f41e241c7f1, type: 3}
   name_: "\u767D\u6BDB\u7DDA\u7375\u72AC"
   max_HP_: 12
   current_HP_: 12

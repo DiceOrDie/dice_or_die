@@ -83,7 +83,7 @@ public class Skill_AddPoint : Skill_base
     public Skill_AddPoint(Skill_base data) : base(data){
         id = 2;
         type = SkillTable.AddPoint;
-        name = "本喵骰子只是沾到髒東西了";
+        name = "所有普通骰等級+1";
         action_state = GameState.kPlayerSelectDice;
     }
     public override bool isValid(State state)
@@ -127,7 +127,7 @@ public class Skill_AddHP : Skill_base
     public Skill_AddHP(Skill_base data) : base(data){
         id = 3;
         type = SkillTable.AddHP;
-        name = "本喵才不是胖，是忘記剪毛";
+        name = "貓貓血量上限+20";
         action_state = GameState.kRoomStart;
     }
     public override bool isValid(State state)
@@ -154,7 +154,7 @@ public class Skill_AddAttack : Skill_base
     public Skill_AddAttack(Skill_base data) : base(data){
         id = 4;
         type = SkillTable.AddAttack;
-        name = "伸出本喵的爪爪";
+        name = "貓貓基礎攻擊+1";
         action_state = GameState.kRoomStart;
     }
     public override bool isValid(State state)
@@ -178,7 +178,7 @@ public class Skill_AddRoundDice : Skill_base
     public Skill_AddRoundDice(Skill_base data) : base(data){
         id = 5;
         type = SkillTable.AddRoundDice;
-        name = "給本喵加餐喵";
+        name = "每回合獲得骰子增加";
         action_state = GameState.kPlayerDrawDice;
     }
     public override bool isValid(State state)
@@ -214,7 +214,7 @@ public class Skill_AddHandDice : Skill_base
     public Skill_AddHandDice(Skill_base data) : base(data){
         id = 6;
         type = SkillTable.AddHandDice;
-        name = "雖然本喵不是倉鼠";
+        name = "增加可持有的骰子上限";
         action_state = GameState.kPlayerDrawDice;
     }
     public override bool isValid(State state)
@@ -238,7 +238,7 @@ public class Skill_AddDropFish : Skill_base
     public Skill_AddDropFish(Skill_base data) : base(data){
         id = 7;
         type = SkillTable.AddDropFish;
-        name = "快給本喵小魚乾喵";
+        name = "怪物掉落的小魚乾增加";
         action_state = GameState.kRoomStart;
     }
     public override bool isValid(State state)

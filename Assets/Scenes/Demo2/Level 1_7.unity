@@ -48363,6 +48363,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Purple Armed Slime
       objectReference: {fileID: 0}
+    - target: {fileID: 6589848711451503477, guid: 9788ab7ca85126f46a31dfdbf1667ce2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9788ab7ca85126f46a31dfdbf1667ce2, type: 3}
 --- !u!1001 &1862578192
@@ -48432,7 +48436,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 4442098320306874015, guid: a79b294694b3bca43a353b1ae956629c, type: 3}
+      propertyPath: m_Size.x
+      value: 1.4666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 4442098320306874015, guid: a79b294694b3bca43a353b1ae956629c, type: 3}
+      propertyPath: m_Size.y
+      value: 2.1333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 4442098320306874015, guid: a79b294694b3bca43a353b1ae956629c, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4442098320306874015, guid: a79b294694b3bca43a353b1ae956629c, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7670691748422820315, guid: a79b294694b3bca43a353b1ae956629c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7670691748422820315, guid: a79b294694b3bca43a353b1ae956629c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7670691748422820315, guid: a79b294694b3bca43a353b1ae956629c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7670691748422820315, guid: a79b294694b3bca43a353b1ae956629c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4442098320306874015, guid: a79b294694b3bca43a353b1ae956629c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a79b294694b3bca43a353b1ae956629c, type: 3}
 --- !u!1 &1997215893
 GameObject:
