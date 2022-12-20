@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: bat_die
+  m_Name: slime_die
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -21,7 +21,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: c5bed327a7fb7934497b378f35f1e7b1, type: 2}
+  m_Motion: {fileID: 7400000, guid: 1b66452cebbd4a545a0f2b60012905aa, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -80,7 +80,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Bat
+  m_Name: Hound
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: attack
@@ -143,7 +143,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: bat_attack
+  m_Name: slime_attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -157,7 +157,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: a77697e5c55599141bc5b40033a1fc1b, type: 2}
+  m_Motion: {fileID: 7400000, guid: 5fe69bfb47146c34c95b6d3fc363b953, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -218,7 +218,7 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 7251071037604996639}
-    m_Position: {x: 250, y: 370, z: 0}
+    m_Position: {x: 290, y: 380, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1429903399136267740}
     m_Position: {x: 280, y: 170, z: 0}
@@ -270,7 +270,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: bat_idle
+  m_Name: slime_idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -286,7 +286,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 35d78c79798e6f14e9fec2481cd73d2f, type: 2}
+  m_Motion: {fileID: 7400000, guid: 38a1b191e3eb82345b2ca1d46ec62681, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -299,7 +299,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: bat_hurt
+  m_Name: slime_hurt
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -313,7 +313,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e375f8795ee3051498eb0ecffa892623, type: 2}
+  m_Motion: {fileID: 7400000, guid: abb4d9611ec34514d837b07ed6e31059, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
