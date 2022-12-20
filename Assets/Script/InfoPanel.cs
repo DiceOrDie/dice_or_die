@@ -38,6 +38,7 @@ public class InfoPanel : MonoBehaviour
     private Text entity_maxhp_;
     private Text entity_base_attack_;
     private Text entity_description_;
+    private Text entity_fish_nums_;
 
     void Start()
     {
@@ -53,6 +54,7 @@ public class InfoPanel : MonoBehaviour
         entity_currenthp_ = GameObject.Find("InfoPanel/Entity/Info/HP/Current HP").GetComponent<Text>();
         entity_maxhp_ = GameObject.Find("InfoPanel/Entity/Info/HP/Max HP").GetComponent<Text>();
         entity_base_attack_ = GameObject.Find("InfoPanel/Entity/Info/Attack/Value").GetComponent<Text>();
+        entity_fish_nums_ = GameObject.Find("InfoPanel/Entity/Info/FishNum/Value").GetComponent<Text>();
         entity_description_ = GameObject.Find("InfoPanel/Entity/Info/Description/Content").GetComponent<Text>();
         dice_area_.SetActive(false);
         entity_area_.SetActive(false);
@@ -93,6 +95,7 @@ public class InfoPanel : MonoBehaviour
         entity_currenthp_.text = entity.current_HP_.ToString();
         entity_maxhp_.text = entity.max_HP_.ToString();
         entity_base_attack_.text = entity.base_attack_.ToString();
+        entity_fish_nums_.text = entity.fish_nums_.ToString();
         entity_description_.text = entity.description_;
         dice_area_.SetActive(false);
         entity_area_.SetActive(true);
