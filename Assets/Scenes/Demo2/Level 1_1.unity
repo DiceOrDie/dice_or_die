@@ -48593,6 +48593,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: InfoPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 1301771117509923553, guid: 19b81daade4ccdf4e91054e794e6945f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1496913889963044512, guid: 19b81daade4ccdf4e91054e794e6945f, type: 3}
       propertyPath: m_FontData.m_Font
       value: 
@@ -48613,6 +48617,10 @@ PrefabInstance:
       propertyPath: m_FontData.m_Font
       value: 
       objectReference: {fileID: 12800000, guid: 86733b772afa8e44c86dc134c4f69fa2, type: 3}
+    - target: {fileID: 8434873516078500240, guid: 19b81daade4ccdf4e91054e794e6945f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19b81daade4ccdf4e91054e794e6945f, type: 3}
 --- !u!1001 &2373519678778889345

@@ -167,7 +167,7 @@ public class Skill_AddAttack : Skill_base
     {
         if(isValid(state))
         {
-            GameManager.instance.player.base_attack_ += level;
+            GameManager.instance.player.base_attack_ = 4 + level;
             yield return null;
         }
     }

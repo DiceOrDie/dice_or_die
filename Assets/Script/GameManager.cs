@@ -385,6 +385,7 @@ public class GameManager : MonoBehaviour
             }
             else if(now_Scene == 10)
             {
+                GameObject.Find("Background Music").GetComponent<AudioSource>().Stop();
                 SceneManager.LoadScene(now_Scene + 1);
             }
             player_.EarnFish(room_tmp_fish_);
