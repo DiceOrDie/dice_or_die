@@ -630,7 +630,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "11. \u5C07\u6240\u6709\u602A\u7269\u64CA\u6557\u5373\u53EF\u7372\u5F97\u52DD\u5229
+  m_Text: "12. \u5C07\u6240\u6709\u602A\u7269\u64CA\u6557\u5373\u53EF\u7372\u5F97\u52DD\u5229
     !"
 --- !u!222 &356403366
 CanvasRenderer:
