@@ -7,6 +7,7 @@ public class SkillUIManager : MonoBehaviour
 {
     public static bool upgrading = false;
     public static bool finished = false;
+    public GameObject confirm;
     List<Skill_base> skills = new List<Skill_base>();
     List<Text> skills_name_text = new List<Text>();
     List<Text> skills_level_text = new List<Text>();
@@ -17,6 +18,7 @@ public class SkillUIManager : MonoBehaviour
         // gameObject.SetActive(true);
         
         skills = GameManager.instance.player.skill_list;
+        confirm.SetActive(false);
         // skills[0] 是芝麻拳
         for (int i = 1; i < skills.Count; i++) {
             skills_name_text.Add(transform.Find("Common/Skill" + i.ToString() + "/Content").gameObject.GetComponent<Text>());
