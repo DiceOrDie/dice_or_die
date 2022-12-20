@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Entity Info
   m_EditorClassIdentifier: 
   sprite_: {fileID: 290362170, guid: 5668ee85aa1e08848b6a6a942e005f4a, type: 3}
-  name_: "\u7D2B\u6BDB\u7DDA\u7375\u72AC"
+  name_: "\u767D\u6BDB\u7DDA\u7375\u72AC"
   max_HP_: 12
   current_HP_: 12
   base_attack_: 0

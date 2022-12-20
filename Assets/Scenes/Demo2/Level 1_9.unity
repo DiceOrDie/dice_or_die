@@ -46141,6 +46141,7 @@ MonoBehaviour:
   player_gameobject_: {fileID: 1376435590}
   state_text_: {fileID: 3489870879076127658}
   font_: {fileID: 0}
+  alter: {fileID: 0}
 --- !u!4 &261837319
 Transform:
   m_ObjectHideFlags: 0
@@ -46297,6 +46298,22 @@ PrefabInstance:
       propertyPath: monsterBehavior_
       value: 
       objectReference: {fileID: 11400000, guid: 1a7d983b303046243ba0021aa5413ab8, type: 2}
+    - target: {fileID: 2653543205227329675, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653543205227329675, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653543205227329675, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653543205227329675, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5082878245077077952, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
       propertyPath: m_Name
       value: Slime Brothers
@@ -46311,7 +46328,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.02
       objectReference: {fileID: 0}
     - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -46349,6 +46366,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: ceeb6d93c07cd84488fd025b3f1d0fdc, type: 2}
+    - target: {fileID: 8141721217873871507, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -192900185, guid: 2a80b7dece7986147a69ecff78fc46cd, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
 --- !u!4 &439682775 stripped
