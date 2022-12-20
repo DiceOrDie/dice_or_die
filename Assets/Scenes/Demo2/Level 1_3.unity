@@ -46138,11 +46138,12 @@ MonoBehaviour:
   level_manger_: {fileID: 0}
   monsters_gameobject_:
   - {fileID: 1223835629}
-  - {fileID: 2128750165}
+  - {fileID: 5082878244196166020}
   - {fileID: 749816675}
   player_gameobject_: {fileID: 1376435590}
   state_text_: {fileID: 3489870879076127658}
   font_: {fileID: 0}
+  alter: {fileID: 0}
 --- !u!4 &261837319
 Transform:
   m_ObjectHideFlags: 0
@@ -46675,7 +46676,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 439682775}
-  - {fileID: 1606346309}
+  - {fileID: 5082878244196166018}
   - {fileID: 1588997804}
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -47462,76 +47463,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
   m_PrefabInstance: {fileID: 1588997803}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &1606346308
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1007599839}
-    m_Modifications:
-    - target: {fileID: 1048675921497175765, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: entity_data_so
-      value: 
-      objectReference: {fileID: 11400000, guid: f22453daef0417d448f428e8790c010d, type: 2}
-    - target: {fileID: 1048675921497175765, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: monsterBehavior_
-      value: 
-      objectReference: {fileID: 11400000, guid: 27bdef0aab2e74d4c8fce5b21b517e96, type: 2}
-    - target: {fileID: 5082878245077077952, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_Name
-      value: Purple Armed Slime
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
---- !u!4 &1606346309 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5082878245077077958, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-  m_PrefabInstance: {fileID: 1606346308}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1624468365
 GameObject:
@@ -48498,11 +48429,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7483c328b52e17348b584c5ffe5229c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2128750165 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5082878245077077952, guid: 96f8ff90220a0e241834a27bc6c5b4f6, type: 3}
-  m_PrefabInstance: {fileID: 1606346308}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &604620231409393461
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48700,6 +48626,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19b81daade4ccdf4e91054e794e6945f, type: 3}
+--- !u!1001 &2159997912002478833
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1007599839}
+    m_Modifications:
+    - target: {fileID: 6589848711451503475, guid: 9788ab7ca85126f46a31dfdbf1667ce2, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589848711451503475, guid: 9788ab7ca85126f46a31dfdbf1667ce2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589848711451503475, guid: 9788ab7ca85126f46a31dfdbf1667ce2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589848711451503475, guid: 9788ab7ca85126f46a31dfdbf1667ce2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589848711451503475, guid: 9788ab7ca85126f46a31dfdbf1667ce2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589848711451503475, guid: 9788ab7ca85126f46a31dfdbf1667ce2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589848711451503475, guid: 9788ab7ca85126f46a31dfdbf1667ce2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589848711451503475, guid: 9788ab7ca85126f46a31dfdbf1667ce2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589848711451503475, guid: 9788ab7ca85126f46a31dfdbf1667ce2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589848711451503475, guid: 9788ab7ca85126f46a31dfdbf1667ce2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589848711451503475, guid: 9788ab7ca85126f46a31dfdbf1667ce2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589848711451503477, guid: 9788ab7ca85126f46a31dfdbf1667ce2, type: 3}
+      propertyPath: m_Name
+      value: Purple Armed Slime
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9788ab7ca85126f46a31dfdbf1667ce2, type: 3}
 --- !u!1001 &2373519678778889345
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -48955,3 +48938,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &5082878244196166018 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6589848711451503475, guid: 9788ab7ca85126f46a31dfdbf1667ce2, type: 3}
+  m_PrefabInstance: {fileID: 2159997912002478833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5082878244196166020 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6589848711451503477, guid: 9788ab7ca85126f46a31dfdbf1667ce2, type: 3}
+  m_PrefabInstance: {fileID: 2159997912002478833}
+  m_PrefabAsset: {fileID: 0}
