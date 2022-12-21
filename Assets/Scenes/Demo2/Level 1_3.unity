@@ -46108,6 +46108,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1007599839}
     m_Modifications:
+    - target: {fileID: 2653543205227329675, guid: e272d3bfdc544664c9efd8336a4cd8f1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653543205227329675, guid: e272d3bfdc544664c9efd8336a4cd8f1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2653543205227329675, guid: e272d3bfdc544664c9efd8336a4cd8f1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5082878245077077952, guid: e272d3bfdc544664c9efd8336a4cd8f1, type: 3}
       propertyPath: m_Name
       value: Purple Bat
